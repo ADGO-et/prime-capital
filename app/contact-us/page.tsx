@@ -117,7 +117,7 @@ export default function Contact() {
               financial future. We value excellence, integrity, and innovation.
             </p>
             <p className="text-sm text-[#504785]  mb-3">
-              We're always looking for exceptional individuals who share our
+              We&apos;re always looking for exceptional individuals who share our
               commitment to excellence, integrity, and innovation.
             </p>
             <p className="text-sm text-[#2014FF]">
