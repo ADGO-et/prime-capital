@@ -85,7 +85,7 @@ const differentiators = [
 
 export default function Services() {
   return (
-    <main className="min-h-screen w-full bg-white dark:bg-black text-gray-900 dark:text-gray-100">
+    <main className="min-h-screen w-full bg-white  text-gray-900">
       <Hero2
         title="Our Services"
         description="Comprehensive Investment Banking and Advisory Solutions"
@@ -96,7 +96,7 @@ export default function Services() {
         <h2 className="text-3xl md:text-4xl font-bold mb-2 text-[#0E0066]">
           What We Offer
         </h2>
-        <p className="text-gray-600 dark:text-[#504785] mb-12">
+        <p className="text-gray-600 text-[#0E0066] mb-12">
           Tailored financial solutions designed to drive your business forward
         </p>
 
@@ -106,7 +106,7 @@ export default function Services() {
               key={i}
               whileHover={{ y: -6, scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="p-6 bg-white dark:bg-zinc-900 rounded-2xl shadow-md hover:shadow-xl border border-gray-200 dark:border-zinc-800 items-center "
+              className="p-6 bg-white  rounded-2xl shadow-md hover:shadow-xl border border-gray-200  items-center "
             >
               <div className="text-white mx-auto mb-4 bg-gradient-to-br from-[#0E0066] to-[#2014FF] w-fit p-2 rounded-full items-center">
                 {item.icon}
@@ -114,7 +114,7 @@ export default function Services() {
               <h3 className="font-semibold text-lg mb-2 text-[#0E0066]">
                 {item.title}
               </h3>
-              <p className="text-sm text-[#504785] dark:text-gray-300 leading-relaxed">
+              <p className="text-sm text-[#504785]  leading-relaxed">
                 {item.desc}
               </p>
             </motion.div>
@@ -123,11 +123,11 @@ export default function Services() {
       </section>
 
       {/* How We Work */}
-      <section className="bg-gray-50 dark:bg-zinc-950 py-20 px-6 md:px-12">
+      <section className="py-20 px-6 md:px-12">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-2 text-[#0E0066]">
           How We Work
         </h2>
-        <p className="text-center text-gray-600 dark:text-gray-300 mb-12 text-[#504785]">
+        <p className="text-center mb-12 text-[#504785]">
           Our proven methodology ensures exceptional results at every stage
         </p>
 
@@ -136,7 +136,7 @@ export default function Services() {
             <motion.div
               key={i}
               whileHover={{ scale: 1.01 }}
-              className="group bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-xl p-6 flex flex-col sm:flex-row gap-4 items-start drop-shadow-lg"
+              className="group bg-white  border border-gray-200  rounded-xl p-6 flex flex-col sm:flex-row gap-4 items-start drop-shadow-lg"
             >
               <div className="flex-shrink-0 h-10 w-10 rounded-full bg-[#2014FF] group-hover:bg-primary text-white flex items-center justify-center font-bold">
                 {step.step}
