@@ -46,7 +46,7 @@ export default function Hero() {
               {/* Button + Down Arrow */}
               <div className="flex flex-col items-center justify-center mt-4">
                 <Link
-                  href="#services"
+                  href="/services"
                   className="rounded-lg px-6 py-3 font-semibold text-white shadow-lg transition-all 
                              bg-gradient-to-r from-primary to-secondary 
                              hover:from-primary/90 hover:to-secondary/90 hover:shadow-xl"

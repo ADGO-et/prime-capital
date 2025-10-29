@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Navbar from "./Navbar";
 
 type Hero2Props = {
   title: React.ReactNode;
@@ -20,6 +21,9 @@ export default function Hero2({ title, description }: Hero2Props) {
 
   return (
     <section className="relative overflow-hidden" style={bgStyle}>
+      <div className="mt-10">
+       <Navbar />
+            </div>
       <div className="relative z-10 mx-auto w-full max-w-3xl mx-auto  py-20 md:my-16 text-center flex flex-col gap-6 border-[1px] border-white/20 rounded-xl">
         <h1 className="text-4xl md:text-7xl font-extrabold text-white leading-tight">
           {title}
