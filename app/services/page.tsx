@@ -107,7 +107,7 @@ export default function Services() {
               key={i}
               whileHover={{ y: -6, scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="p-6 bg-white  rounded-2xl shadow-md hover:shadow-xl border border-gray-200  items-center "
+              className="p-6 bg-[url('/back-grid.jpg')] bg-cover bg-center bg-white/80 rounded-2xl shadow-md hover:shadow-xl border border-gray-200 items-center"
             >
               <div className="text-white mx-auto mb-4 bg-gradient-to-br from-[#0E0066] to-[#2014FF] w-fit p-2 rounded-full items-center">
                 {item.icon}
@@ -185,7 +185,7 @@ export default function Services() {
 
       {/* CTA */}
       <section className="py-16 px-6 md:px-12 text-center">
-        <div className="max-w-3xl mx-auto  rounded-2xl p-10 border border-[#DAD9F280] shadow drop-shadow-xl ">
+        <div className="max-w-3xl mx-auto bg-[url('/back-grid.jpg')] bg-cover bg-center bg-white/90 rounded-2xl p-10 border border-[#DAD9F280] shadow drop-shadow-xl ">
           <h3 className="text-2xl md:text-3xl font-semibold mb-4 text-[#0E0066]">
             Partner with Prime Capital to Shape Ethiopia&apos;s Capital Market
             Future

@@ -44,7 +44,7 @@ export default function SignatureStrengths() {
           {strengths.map((item, index) => (
             <div
               key={index}
-              className="relative rounded-2xl border border-white/20 bg-white/10 
+              className="relative rounded-2xl border border-white/20 bg-white/10 bg-[url('/back-grid.jpg')] bg-cover bg-center
                          backdrop-blur-xl shadow-[0_4px_25px_rgba(20,28,255,0.15)] 
                          hover:shadow-[0_8px_35px_rgba(20,28,255,0.25)] 
                          p-6 text-left transition-all duration-300 hover:-translate-y-1"
