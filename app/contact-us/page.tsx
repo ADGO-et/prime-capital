@@ -53,7 +53,7 @@ export default function Contact() {
               key={i}
               whileHover={{ y: -6, scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="group p-6 bg-white rounded-2xl shadow-md hover:shadow-xl border border-gray-200 "
+              className="group p-6 bg-[url('/back-grid.jpg')] bg-cover bg-center bg-white/80 rounded-2xl shadow-md hover:shadow-xl border border-gray-200 "
             >
               <div className="mb-4 mx-auto inline-flex h-12 w-12 items-center justify-center rounded-full text-white bg-gradient-to-br from-[#0E0066] to-[#2014FF] shadow-sm transition-transform group-hover:scale-105">
                 {c.icon}
@@ -83,7 +83,7 @@ export default function Contact() {
           <motion.div
             whileHover={{ y: -4, scale: 1.01 }}
             transition={{ type: "spring", stiffness: 300 }}
-            className="rounded-2xl p-6 bg-white  border border-gray-200 shadow"
+            className="rounded-2xl p-6 bg-[url('/back-grid.jpg')] bg-cover bg-center bg-white/80 border border-gray-200 shadow"
           >
             <h3 className="text-2xl font-bold text-[#0E0066] mb-3">
               New Client Inquiries
@@ -107,7 +107,7 @@ export default function Contact() {
           <motion.div
             whileHover={{ y: -4, scale: 1.01 }}
             transition={{ type: "spring", stiffness: 300 }}
-            className="rounded-2xl p-6 bg-white border border-gray-200  shadow"
+            className="rounded-2xl p-6 bg-[url('/back-grid.jpg')] bg-cover bg-center bg-white/80 border border-gray-200  shadow"
           >
             <h3 className="text-2xl font-bold text-[#0E0066] mb-3">
               Career Opportunities
@@ -145,7 +145,7 @@ export default function Contact() {
         <motion.div
           whileHover={{ y: -4, scale: 1.01 }}
           transition={{ type: "spring", stiffness: 300 }}
-          className="max-w-5xl mx-auto rounded-2xl p-10 bg-[#1B16FF1A]/70 border border-gray-200 shadow h-[400px] items-center justify-center flex flex-col"
+          className="max-w-5xl mx-auto rounded-2xl p-10 bg-[url('/back-grid.jpg')] bg-cover bg-center bg-[#1B16FF1A]/70 border border-gray-200 shadow h-[400px] items-center justify-center flex flex-col"
         >
           <div className="mb-4 mx-auto inline-flex h-12 w-12 items-center justify-center text-[#0E0066]">
             <MapPin size={32} />
