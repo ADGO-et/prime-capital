@@ -15,14 +15,14 @@ export default function Footer() {
   return (
     <footer className="relative w-full text-white">
       {/* Main footer section */}
-      <div className="bg-secondary"
+      <div className="bg-gradient-to-b from-secondary to-[#1a259d]"
 >
         <div className="py-12">
-          <div className="mx-auto max-w-6xl px-6 py-12 grid grid-cols-1 sm:grid-cols-4 gap-8">
+          <div className="mx-auto max-w-7xl px-6 py-12 grid grid-cols-1 sm:grid-cols-4 gap-8">
             {/* Logo & description */}
             <div className="flex flex-col gap-4">
               {/* Logo and name */}
-              <div className="pl-10 flex items-center text-white font-semibold text-lg select-none">
+              <div className="pl-4 flex items-center text-white font-semibold text-lg select-none">
                 <Link href="/">
               <Image
                 src="/logoblack.png"
@@ -35,7 +35,7 @@ export default function Footer() {
               </div>
 
               {/* Description */}
-              <p className="text-sm text-white/80 pl-[calc(1.75rem+0.625rem)]">
+              <p className="text-sm text-white/80 pl-4">
                 Empowering Ethiopia&apos;s financial future through innovative
                 investment banking solutions.
               </p>
@@ -120,12 +120,12 @@ export default function Footer() {
       </div>
 
       {/* Bottom section */}
-      <div className="bg-gradient-to-b from-secondary via-secondary to-accent/90">
-  <div className="relative backdrop-blur-lg bg-white/5">
+      <div className="bg-[#1a259d]">
+  <div className="">
     {/* Add more padding and spacing here */}
-    <div className="mx-auto max-w-6xl px-6 py-8 flex flex-col sm:flex-row justify-between items-center text-xs">
+    <div className="mx-auto max-w-7xl px-6 pb-8 flex flex-col sm:flex-row justify-between items-center text-xs">
       <p className="bg-gradient-to-r from-white/70 to-accent bg-clip-text text-transparent">
-        © 2025 Prime Capital S.C. — All Rights Reserved
+        © {new Date().getFullYear()} Prime Capital S.C. — All Rights Reserved
       </p>
 
       {/* Social Icons */}
