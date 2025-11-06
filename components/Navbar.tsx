@@ -1,20 +1,34 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Elevate and subtly animate the navbar when the page is scrolled
+  useEffect(() => {
+    const onScroll = () => {
+      // small threshold to trigger the floating state
+      setScrolled(window.scrollY > 8);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 w-full">
-      <div className="w-[95%] max-w-6xl mx-auto p-[6px]">
+  <div className="w-[95%] max-w-6xl mx-auto p-1.5">
         <nav
-          className="relative w-full rounded-xl  
-                     bg-gradient-to-r from-accent/85 to-primary
-                     backdrop-blur-2xl shadow-[0_0_25px_rgba(0,0,0,0.3)] 
-                     flex items-center justify-between px-4 sm:px-6 py-3 "
+          className={`relative w-full rounded-xl transition-all duration-300 ease-out
+                     ${scrolled
+                       ? "bg-linear-to-r from-accent/90 to-primary/95 shadow-[0_10px_30px_rgba(0,0,0,0.35)] ring-1 ring-white/10 backdrop-blur-2xl"
+                       : "bg-linear-to-r from-accent/85 to-primary shadow-[0_0_25px_rgba(0,0,0,0.3)] backdrop-blur-2xl"}
+                     transform ${scrolled ? "scale-100" : "scale-[0.995]"}
+                     flex items-center justify-between px-4 sm:px-6 py-3`}
         >
           <div className="flex items-center gap-3">
             <Link href="#">
