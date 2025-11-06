@@ -7,9 +7,9 @@ import { useParams } from "next/navigation";
 import { useBlogById } from "@/hooks/queries/useNewsQuery";
 import { Block, ParagraphBlock, HeadingBlock, ImageBlock, YoutubeBlock, LinkBlock } from "@/services/news";
 import { NewsSection } from "@/components/news-comp/news-section";
-import { useTheme } from "next-themes";
 import { ZoomIn } from "lucide-react";
 import logo from "@/public/logo.png";
+import Lightbox from "@/components/Lightbox";
 
 const YouTubeEmbed = ({ url }: { url: string }) => {
   // Extract YouTube video ID and build embed URL; fallback to original URL in iframe
@@ -40,7 +40,6 @@ const YouTubeEmbed = ({ url }: { url: string }) => {
 const NewsDetailPage = () => {
   const params = useParams<{ id: string }>();
   const id = params?.id as string;
-  const { theme } = useTheme();
 
   const { data, isFetching, isError } = useBlogById(id!);
   const blog = data?.data;
@@ -160,7 +159,7 @@ const NewsDetailPage = () => {
                                 fill
                                 className="object-cover rounded-md transition-transform duration-200 group-hover:scale-105 group-active:scale-95"
                               />
-                              <span className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity" />
+                              <span className="absolute inset-0 bg-linear-to-t from-black/40 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity" />
                               <span className="pointer-events-none absolute bottom-2 left-2 flex items-center gap-1 text-xs font-medium text-white bg-black/50 px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
                                 <ZoomIn className="w-3.5 h-3.5" />
                                 <span>Click to enlarge</span>
@@ -196,14 +195,14 @@ const NewsDetailPage = () => {
     </div>
         <NewsSection type="related" />
         {/* <MajorCard type="news" /> */}
-        {/* <Lightbox
+        <Lightbox
           images={lightboxImages}
           index={lightboxIndex}
           open={lightboxOpen}
           onClose={() => setLightboxOpen(false)}
           onChange={setLightboxIndex}
-          alt={blog?.title ?? "image"}
-        /> */}
+          alt={blog?.title?.en ?? "image"}
+        />
     </div>
   );
 };

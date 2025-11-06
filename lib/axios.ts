@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  // baseURL: "https://yehulusaccos.et:4557",
-  baseURL: "https://yehulu-backend.onrender.com/",
+  baseURL: "https://primecapitalsc.com:3334/",
   headers: { "Content-Type": "application/json" },
 });
 
