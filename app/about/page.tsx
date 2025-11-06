@@ -242,14 +242,14 @@ export default function About() {
   const [selected, setSelected] = useState<BoardMember | null>(null);
 
   return (
-    <main className="min-h-screen w-full bg-white text-gray-900">
+    <main className="min-h-screen w-full bg-white text-gray-900 overflow-x-hidden">
       <Hero2
         title="About Prime Capital S.C."
         description="Building Ethiopia's Financial Future Through Integrity, Innovation, and Leadership"
       />
 
       {/* Corporate Overview */}
-      <section className="py-16 px-6 md:px-12">
+      <section className="py-16 px-6 md:px-12 overflow-x-hidden">
         <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] max-w-6xl mx-auto">
           <motion.div {...fadeInLeft}>
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#0E0066]">
@@ -258,7 +258,7 @@ export default function About() {
             <div className="space-y-4 text-[#0E0066]">
               <p className="text-[#0E0066]">
                 Prime Capital S.C. is a pioneering investment banking firm
-                established to drive Ethiopia's capital market development.
+                established to drive Ethiopia&apos;s capital market development.
                 Founded with a clear vision to transform the financial
                 landscape, we bring together deep market expertise and
                 innovative solutions.
@@ -271,7 +271,7 @@ export default function About() {
               </p>
               <p className="text-[#0E0066]">
                 With a team of seasoned professionals and strategic
-                partnerships, we're positioned to deliver comprehensive
+                partnerships, we&apos;re positioned to deliver comprehensive
                 investment banking and advisory services that meet the evolving
                 needs of our clients.
               </p>
@@ -694,7 +694,7 @@ export default function About() {
               </h3>
             </div>
             <p className="text-sm text-[#504785] leading-loose">
-              Contributing to Ethiopia's green growth strategy by promoting
+              Contributing to Ethiopia&apos;s green growth strategy by promoting
               ESG-aligned investments and community engagement initiatives.
             </p>
           </motion.div>
