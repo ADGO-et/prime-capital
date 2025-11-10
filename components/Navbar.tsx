@@ -40,8 +40,8 @@ export default function Navbar() {
   }, []);
 
   return (
-  <header className={`w-full ${scrolled ? 'sticky top-0 shadow-2xl' : ''} z-50 relative isolate`}>
-    <nav className={`w-full bg-linear-to-br from-[#01016F] via-[#141CFF] to-[#2014FF] backdrop-blur-2xl px-6 md:px-10 lg:px-16 py-3 flex items-center justify-between transition-shadow duration-300 ${scrolled ? 'shadow-lg' : ''}`}>
+  <header className="w-full sticky top-0 z-50 isolate">
+    <nav className={`w-full bg-linear-to-br from-[#01016F] via-[#141CFF] to-[#2014FF] backdrop-blur-2xl px-6 md:px-10 lg:px-16 py-3 flex items-center justify-between transition-shadow duration-300 ${scrolled ? 'shadow-lg' : 'shadow-none'}`}>
         
           <div className="flex items-center gap-3">
             <Link href="#">
@@ -56,16 +56,16 @@ export default function Navbar() {
           </div>
           <div className="flex gap-4">
             {/* Desktop Navigation */}
-            <ul className="hidden sm:flex items-center gap-8 text-sm text-white/80 ">
+            <ul className="hidden sm:flex items-center gap-8 text-sm ">
               <li>
-                <Link href="/" className="hover:text-white transition-colors">
+                <Link href="/" className="font-semibold text-white hover:text-accent transition-colors">
                   Home
                 </Link>
               </li>
               <li>
                 <Link
                   href="/about"
-                  className="hover:text-white transition-colors"
+                  className="font-semibold text-white hover:text-accent transition-colors"
                 >
                   About Us
                 </Link>
@@ -73,13 +73,13 @@ export default function Navbar() {
               <li>
                 <Link
                   href="/services"
-                  className="hover:text-white transition-colors"
+                  className="font-semibold text-white hover:text-accent transition-colors"
                 >
                   Services
                 </Link>
               </li>
               <li>
-                <Link href="/our-team" className="hover:text-white transition-colors">
+                <Link href="/our-team" className="font-semibold text-white hover:text-accent transition-colors">
                   Our Team
                 </Link>
               </li>
@@ -88,7 +88,7 @@ export default function Navbar() {
                 onMouseEnter={handleOpen}
                 onMouseLeave={handleClose}
               >
-                <div className="flex items-center gap-1 hover:text-white transition-colors cursor-pointer select-none">
+                <div className="flex items-center gap-1 font-semibold text-white hover:text-accent transition-colors cursor-pointer select-none">
                   News and Resources
                   <ChevronDownIcon className={`w-4 h-4 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
                 </div>
@@ -99,24 +99,24 @@ export default function Navbar() {
                       className="block px-4 py-3 hover:bg-white/10 transition-colors"
                       onClick={() => setDropdownOpen(false)}
                     >
-                      <div className="font-medium text-white">Blog</div>
-                      <p className="text-sm text-white/80 leading-snug">Stay updated with our latest articles and News and Resources.</p>
+                      <div className="font-semibold text-white">Blog</div>
+                      <p className="text-sm text-white/70 leading-snug">Stay updated with our latest articles and News and Resources.</p>
                     </Link>
                     <Link
                       href="/listed-companies"
                       className="block px-4 py-3 hover:bg-white/10 transition-colors"
                       onClick={() => setDropdownOpen(false)}
                     >
-                      <div className="font-medium text-white">ESX Listed Companies</div>
-                      <p className="text-sm text-white/80 leading-snug">Explore companies listed on the Ethiopian Securities Exchange.</p>
+                      <div className="font-semibold text-white">ESX Listed Companies</div>
+                      <p className="text-sm text-white/70 leading-snug">Explore companies listed on the Ethiopian Securities Exchange.</p>
                     </Link>
                     <Link
                       href="/vacancy"
                       className="block px-4 py-3 hover:bg-white/10 transition-colors"
                       onClick={() => setDropdownOpen(false)}
                     >
-                      <div className="font-medium text-white">Jobs</div>
-                      <p className="text-sm text-white/80 leading-snug">Explore open positions and join our team.</p>
+                      <div className="font-semibold text-white">Jobs</div>
+                      <p className="text-sm text-white/70 leading-snug">Explore open positions and join our team.</p>
                     </Link>
                   </div>
                 )}
@@ -133,8 +133,7 @@ export default function Navbar() {
 
             <Link
               href="/contact-us"
-              className="hidden sm:inline-block rounded-md bg-primary text-white font-semibold text-xs px-4 py-2 
-                       shadow hover:bg-primary/10 transition-all"
+              className="hidden sm:inline-block rounded-md bg-white text-primary font-semibold text-xs px-4 py-2 shadow hover:bg-accent/30 hover:text-primary transition-colors"
             >
               Contact
             </Link>
@@ -157,32 +156,32 @@ export default function Navbar() {
           <div className="sm:hidden mt-2 flex flex-col gap-2 px-4 py-3 rounded-xl bg-white text-primary shadow-md">
             <Link
               href="/"
-              className=" font-semibold py-1 px-2 rounded hover:bg-white/10 transition"
+              className="font-semibold text-primary py-1 px-2 rounded hover:bg-white/10 transition"
             >
               Home
             </Link>
             <Link
               href="/about"
-              className=" font-semibold py-1 px-2 rounded hover:bg-white/10 transition"
+              className="font-semibold text-primary py-1 px-2 rounded hover:bg-white/10 transition"
             >
               About Us
             </Link>
             <Link
               href="/services"
-              className=" font-semibold py-1 px-2 rounded hover:bg-white/10 transition"
+              className="font-semibold text-primary py-1 px-2 rounded hover:bg-white/10 transition"
             >
               Services
             </Link>
             <Link
               href="/our-team"
-              className=" font-semibold py-1 px-2 rounded hover:bg-white/10 transition"
+              className="font-semibold text-primary py-1 px-2 rounded hover:bg-white/10 transition"
             >
               Our Team
             </Link>
             <div className="flex flex-col">
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="flex items-center justify-between font-semibold py-1 px-2 rounded hover:bg-white/10 transition"
+                className="flex items-center justify-between font-semibold text-primary py-1 px-2 rounded hover:bg-white/10 transition"
               >
                 News and Resources
                 <ChevronDownIcon className="w-4 h-4" />
@@ -191,7 +190,7 @@ export default function Navbar() {
                 <div className="ml-4 flex flex-col space-y-1">
                   <Link
                     href="/news"
-                    className="font-semibold py-1 px-2 rounded hover:bg-white/10 transition"
+                    className="font-semibold text-primary py-1 px-2 rounded hover:bg-white/10 transition"
                     onClick={() => setDropdownOpen(false)}
                   >
                     <div>Blog</div>
@@ -199,7 +198,7 @@ export default function Navbar() {
                   </Link>
                   <Link
                     href="/listed-companies"
-                    className="font-semibold py-1 px-2 rounded hover:bg-white/10 transition"
+                    className="font-semibold text-primary py-1 px-2 rounded hover:bg-white/10 transition"
                     onClick={() => setDropdownOpen(false)}
                   >
                     <div>ESX Listed Companies</div>
@@ -207,7 +206,7 @@ export default function Navbar() {
                   </Link>
                   <Link
                     href="/vacancy/jobs"
-                    className="font-semibold py-1 px-2 rounded hover:bg-white/10 transition"
+                    className="font-semibold text-primary py-1 px-2 rounded hover:bg-white/10 transition"
                     onClick={() => setDropdownOpen(false)}
                   >
                     <div>Jobs</div>
@@ -224,7 +223,7 @@ export default function Navbar() {
             </Link> */}
             <Link
               href="/contact-us"
-              className="text-white w-full rounded-2xl text-center font-semibold py-1 px-2  bg-primary hover:bg-[#F3F4F6] transition"
+              className="w-full rounded-2xl text-center font-semibold py-2 px-3 bg-white text-primary hover:bg-accent/50 transition-colors"
             >
               Contact
             </Link>

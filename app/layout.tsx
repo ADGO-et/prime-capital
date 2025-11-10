@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Prime Capital - Investment Bank",
   description: "Drive Ethiopia's capital market development",
   icons: {
-    icon: '/logoblack.png',
+    icon: '/prime.png',
   },
 };
 
