@@ -134,7 +134,7 @@ const NewsDetailPage = () => {
                     case "paragraph": {
                       const pb = block as ParagraphBlock;
                       const content = pb.content.en;
-                      return <p key={idx} className="leading-7 text-foreground/90">{content}</p>;
+                      return <p key={idx} className="leading-7 text-foreground/90 text-lg font-sans">{content}</p>;
                     }
                     case "image": {
                       const ib = block as ImageBlock;
