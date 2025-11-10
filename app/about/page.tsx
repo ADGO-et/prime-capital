@@ -98,7 +98,7 @@ export default function About() {
       <section className="pt-20 pb-12 px-6 md:px-12 overflow-x-hidden">
         <div className="max-w-6xl mx-auto">
           <motion.div {...fadeInLeft}>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl text-center font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
               Corporate Overview
             </h2>
             <div className="space-y-4 text-[#0E0066] text-base md:text-lg leading-relaxed">
@@ -141,7 +141,7 @@ export default function About() {
               <h3 className="text-xs md:text-sm uppercase tracking-wider font-semibold text-[#0E0066]/60 mb-3">
                 Paid-up Capital
               </h3>
-              <p className="text-4xl md:text-5xl font-bold text-[#0E0066]">
+              <p className="text-3xl md:text-4xl font-bold text-[#0E0066]">
                 ETB 25M
               </p>
             </motion.div>
@@ -157,7 +157,7 @@ export default function About() {
               <h3 className="text-xs md:text-sm uppercase tracking-wider font-semibold text-[#2014FF]/60 mb-3">
                 Subscribed Capital
               </h3>
-              <p className="text-4xl md:text-5xl font-bold text-[#2014FF]">
+              <p className="text-3xl md:text-4xl font-bold text-[#2014FF]">
                 ETB 32M
               </p>
             </motion.div>
@@ -173,7 +173,7 @@ export default function About() {
               <h3 className="text-xs md:text-sm uppercase tracking-wider font-semibold text-[#504785]/60 mb-3">
                 Callable Capital
               </h3>
-              <p className="text-4xl md:text-5xl font-bold text-[#504785]">
+              <p className="text-3xl md:text-4xl font-bold text-[#504785]">
                 ETB 7M
               </p>
             </motion.div>

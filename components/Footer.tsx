@@ -99,21 +99,21 @@ export default function Footer() {
                   <div className="p-2 rounded-md bg-white/10 flex items-center justify-center hover:bg-accent/20 transition">
                     <FaMapMarkerAlt className="text-accent text-base" />
                   </div>
-                  <span>Kirkos Sub-City, Woreda 08, Addis Ababa, Ethiopia</span>
+                  <span>Yeka Sub-City, Woreda 07, Addis Ababa, Ethiopia</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <div className="p-2 rounded-md bg-white/10 flex items-center justify-center hover:bg-accent/20 transition">
                     <FaEnvelope className="text-accent text-base" />
                   </div>
                   <span className="hover:text-accent transition cursor-pointer">
-                    info@primecapital.com
+                    Info@primecapitalsc.com
                   </span>
                 </li>
                 <li className="flex items-center gap-3">
                   <div className="p-2 rounded-md bg-white/10 flex items-center justify-center hover:bg-accent/20 transition">
                     <FaPhone className="text-accent text-base" />
                   </div>
-                  <span>+251 (0) 116 629 000</span>
+                  <span>+251-111-137070</span>
                 </li>
               </ul>
             </div>

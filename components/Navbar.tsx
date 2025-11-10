@@ -93,30 +93,29 @@ export default function Navbar() {
                   <ChevronDownIcon className={`w-4 h-4 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
                 </div>
                 {dropdownOpen && (
-                  <div className="absolute top-full right-0 mt-2 w-64 bg-linear-to-br from-primary/80 to-secondary/80 backdrop-blur-lg rounded-md shadow-lg py-2 z-50 animate-in fade-in slide-in-from-top-1">
+                  <div
+                    className="absolute top-full right-0 mt-3 w-72 rounded-2xl border border-white/20 bg-gradient-to-br from-[#3624ff] to-[#3624ff] backdrop-blur-2xl backdrop-saturate-150 shadow-2xl ring-1 ring-white/10 p-2 z-50 animate-in fade-in slide-in-from-top-1 overflow-visible"
+                  >
                     <Link
                       href="/news"
-                      className="block px-4 py-3 hover:bg-white/10 transition-colors"
+                      className="block px-4 py-3 rounded-lg hover:bg-white/15 transition-colors duration-200 whitespace-normal"
                       onClick={() => setDropdownOpen(false)}
                     >
-                      <div className="font-semibold text-white">Blog</div>
-                      <p className="text-sm text-white/70 leading-snug">Stay updated with our latest articles and News and Resources.</p>
+                      <div className="font-semibold text-white drop-shadow-sm">News and Updates</div>
                     </Link>
                     <Link
                       href="/listed-companies"
-                      className="block px-4 py-3 hover:bg-white/10 transition-colors"
+                      className="block px-4 py-3 rounded-lg hover:bg-white/15 transition-colors duration-200 whitespace-normal"
                       onClick={() => setDropdownOpen(false)}
                     >
-                      <div className="font-semibold text-white">ESX Listed Companies</div>
-                      <p className="text-sm text-white/70 leading-snug">Explore companies listed on the Ethiopian Securities Exchange.</p>
+                      <div className="font-semibold text-white drop-shadow-sm">ESX Listed Companies</div>
                     </Link>
                     <Link
                       href="/vacancy"
-                      className="block px-4 py-3 hover:bg-white/10 transition-colors"
+                      className="block px-4 py-3 rounded-lg hover:bg-white/15 transition-colors duration-200 whitespace-normal"
                       onClick={() => setDropdownOpen(false)}
                     >
-                      <div className="font-semibold text-white">Jobs</div>
-                      <p className="text-sm text-white/70 leading-snug">Explore open positions and join our team.</p>
+                      <div className="font-semibold text-white drop-shadow-sm">Jobs</div>
                     </Link>
                   </div>
                 )}
@@ -190,27 +189,24 @@ export default function Navbar() {
                 <div className="ml-4 flex flex-col space-y-1">
                   <Link
                     href="/news"
-                    className="font-semibold text-primary py-1 px-2 rounded hover:bg-white/10 transition"
+                    className="font-semibold text-primary py-2 px-3 rounded-lg hover:bg-primary/10 transition-all duration-200"
                     onClick={() => setDropdownOpen(false)}
                   >
-                    <div>Blog</div>
-                    <p className="text-sm text-gray-600">Stay updated with our latest articles and Insights.</p>
+                    News and Updates
                   </Link>
                   <Link
                     href="/listed-companies"
-                    className="font-semibold text-primary py-1 px-2 rounded hover:bg-white/10 transition"
+                    className="font-semibold text-primary py-2 px-3 rounded-lg hover:bg-primary/10 transition-all duration-200"
                     onClick={() => setDropdownOpen(false)}
                   >
-                    <div>ESX Listed Companies</div>
-                    <p className="text-sm text-gray-600">Explore companies listed on the Ethiopian Securities Exchange.</p>
+                    ESX Listed Companies
                   </Link>
                   <Link
                     href="/vacancy/jobs"
-                    className="font-semibold text-primary py-1 px-2 rounded hover:bg-white/10 transition"
+                    className="font-semibold text-primary py-2 px-3 rounded-lg hover:bg-primary/10 transition-all duration-200"
                     onClick={() => setDropdownOpen(false)}
                   >
-                    <div>Jobs</div>
-                    <p className="text-sm text-gray-600">Explore open positions and join our team.</p>
+                    Jobs
                   </Link>
                 </div>
               )}

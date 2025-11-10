@@ -21,21 +21,21 @@ export default function Contact() {
                 <span className="mt-1 text-[#2014FF]"><MapPin size={20} /></span>
                 <div>
                   <div className="font-semibold text-[#0E0066]">Visit Us</div>
-                  <p className="text-sm text-[#504785]">Kirkos Sub-City, Woreda 08<br/>Addis Ababa, Ethiopia</p>
+                  <p className="text-sm text-[#504785]">Yeka Sub-City, Woreda 07<br/>Addis Ababa, Ethiopia</p>
                 </div>
               </li>
               <li className="flex items-start gap-3">
                 <span className="mt-1 text-[#2014FF]"><Mail size={20} /></span>
                 <div>
                   <div className="font-semibold text-[#0E0066]">Email Us</div>
-                  <a href="mailto:info@primecapital.com" className="text-sm text-[#504785] hover:underline">info@primecapital.com</a>
+                  <a href="mailto:Info@primecapitalsc.com" className="text-sm text-[#504785] hover:underline">primecapitalsc.com</a>
                 </div>
               </li>
               <li className="flex items-start gap-3">
                 <span className="mt-1 text-[#2014FF]"><Phone size={20} /></span>
                 <div>
                   <div className="font-semibold text-[#0E0066]">Call Us</div>
-                  <a href="tel:+251 (0)91122 2911" className="text-sm text-[#504785] hover:underline">+251 11 XXX XXXX</a>
+                  <a href="tel:+251 (0)91122 2911" className="text-sm text-[#504785] hover:underline">+251-111-137070</a>
                 </div>
               </li>
               <li className="flex items-start gap-3">
@@ -52,7 +52,7 @@ export default function Contact() {
           <div className="w-full h-[420px] rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
             <iframe
               title="Prime Capital Location"
-              src="https://www.google.com/maps?q=Addis%20Ababa%2C%20Ethiopia&output=embed"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=38.7468%2C9.0054%2C38.7578%2C9.0154&layer=mapnik"
               className="w-full h-full"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
@@ -81,9 +81,9 @@ export default function Contact() {
               <span className="font-semibold ">Email:</span>{" "}
               <a
                 className=" hover:underline"
-                href="mailto:info@primecapital.com"
+                href="mailto:Info@primecapitalsc.com"
               >
-                info@primecapital.com
+                Info@primecapitalsc.com
               </a>
             </p>
           </motion.div>
@@ -108,9 +108,9 @@ export default function Contact() {
               <span className="font-semibold ">Email:</span>{" "}
               <a
                 className="hover:underline"
-                href="mailto:careers@primecapital.com"
+                href="mailto:Info@primecapitalsc.com"
               >
-                careers@primecapital.com
+                Info@primecapitalsc.com
               </a>
             </p>
           </motion.div>

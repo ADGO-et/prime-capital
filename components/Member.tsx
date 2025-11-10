@@ -14,13 +14,18 @@ import {
 } from "lucide-react";
 
 type SocialLink = { platform: string; url: string };
-type Member = {
+export type Member = {
   name: string;
   role: string;
+  email?: string;
+  education?: string[];
+  exposure?: string[];
   qualifications?: string;
   occupation?: string;
   bio?: string;
   socialLinks?: SocialLink[];
+  img?: string; // image path
+  edu?: string; // short education summary
 };
 
 function getPlatformIcon(platform: string) {
@@ -75,7 +80,7 @@ export default function MemberModal({
         <motion.div
           aria-modal
           role="dialog"
-          className="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
+          className="fixed inset-0 z-100 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -106,6 +111,31 @@ export default function MemberModal({
 
             {/* Body */}
             <div className="p-6 space-y-5 text-[#0E0066]">
+              {/* Contact */}
+              {member.email && (
+                <div>
+                  <h4 className="font-semibold">Contact</h4>
+                  <a
+                    href={`mailto:${member.email}`}
+                    className="text-sm text-[#2014FF] hover:underline break-all"
+                  >
+                    {member.email}
+                  </a>
+                </div>
+              )}
+
+              {/* Education */}
+              {(member.education?.length ?? 0) > 0 && (
+                <div>
+                  <h4 className="font-semibold">Education</h4>
+                  <ul className="mt-1 list-disc list-inside text-sm text-[#4A5565] space-y-1">
+                    {member.education!.map((e, idx) => (
+                      <li key={idx}>{e}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
               {member.qualifications && (
                 <div>
                   <h4 className="font-semibold">Qualifications</h4>
@@ -126,6 +156,18 @@ export default function MemberModal({
                 <div>
                   <h4 className="font-semibold">Biography</h4>
                   <p className="text-sm text-[#4A5565] mt-1">{member.bio}</p>
+                </div>
+              )}
+
+              {/* Experience & Exposure */}
+              {(member.exposure?.length ?? 0) > 0 && (
+                <div>
+                  <h4 className="font-semibold">Experience & Exposure</h4>
+                  <ul className="mt-1 list-disc list-inside text-sm text-[#4A5565] space-y-1">
+                    {member.exposure!.map((x, idx) => (
+                      <li key={idx}>{x}</li>
+                    ))}
+                  </ul>
                 </div>
               )}
 

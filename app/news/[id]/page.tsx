@@ -57,8 +57,8 @@ const NewsDetailPage = () => {
   };
 
   return (
-    <div className="bg-white text-gray-900 border-4 py-30">
-          <div className="max-w-7xl mx-auto px-4 py-10">
+    <div className="bg-white text-gray-900 border-4 pb-30">
+      <div className="max-w-7xl mx-auto px-4 py-10">
       <div className="mb-6">
         <Link href="/news" className="inline-flex items-center gap-2 text-sm text-primary hover:underline">
           <ChevronLeft className="h-4 w-4" /> Back to News
