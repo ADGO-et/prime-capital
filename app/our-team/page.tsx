@@ -52,26 +52,27 @@ const boardMembers: MemberType[] = [
     bio: "17+ years in consulting, finance, and governance. Former Chair, Hijra Bank. Expertise in corporate strategy and financial sector leadership.",
   },
   {
-    name: "Tewdros M. Delelegn",
-    role: "D/Board Chairman",
-    edu: "MBA • BA",
+    name: "Tewodros M. Delelegn",
+    role: "V/Board Chairperson",
+    edu: "MSc • BA",
     img: "/tewdros.png",
     education: [
       "MSc in Telecom Business Administration — Addis Ababa University",
-      "BA in Management — Addis Ababa University",
+      "BA in Management — Addis Ababa University"
     ],
     exposure: [
-      "Managing Director at Credoks Digital Services; Board Chairman at NEO Microfinance",
-      "Nearly 20 years of leadership in telecom and fintech",
-      "8 years at Ethio Telecom in senior product development leading cutting-edge digital financial products",
+      "Managing Director at Credoks Digital Services",
+      "Board Chairman at NEO Microfinance (MFI)",
+      "8 years at Ethio Telecom in senior product development roles",
+      "20 years in telecom & fintech leadership"
     ],
-    qualifications: "MBA (AAU), BA in Management (Haramaya University)",
-    occupation: "Managing Partner, Elegance Group",
-    bio: "17+ years in consulting, finance, and governance. Former Chair, Hijra Bank. Brings extensive expertise in corporate strategy and financial sector leadership.",
+    qualifications: "Leadership, innovation, and financial technology expertise",
+    occupation: "Managing Director, Credoks Digital Services; Board Chairman, NEO Microfinance (MFI)",
+    bio: "Telecom and fintech executive with strong governance and product innovation background."
   },
   {
     name: "Habib Mohammed",
-    role: "Executive Board Director",
+    role: "Board Member",
     edu: "MSc • BSc",
     img: "/habib.png",
     education: [
@@ -81,7 +82,7 @@ const boardMembers: MemberType[] = [
       "Certified Member — Chartered Institute for Securities & Investment (CISI)",
     ],
     exposure: [
-      "20+ years of leadership in banking and industry",
+      "20+ years of leadership in banking and Corporate management",
       "Vice President for Banking Business at Hijra Bank; former CEO at Yekatit Paper Converting PLC",
       "Over a decade at NIB International Bank, rising to Director levels",
       "Advisor and trainer for World Bank Group (IFC) and National Bank of Ethiopia on IFRS and capital markets",
@@ -89,7 +90,7 @@ const boardMembers: MemberType[] = [
   },
   {
     name: "Behailu Aregahgn",
-    role: "Board Secretary",
+    role: "Board Member",
     edu: "MBA, BA in Management",
     img: "/behailu.jpg",
     education: [
@@ -105,7 +106,7 @@ const boardMembers: MemberType[] = [
   },
   {
     name: "Kalkidan Niguse",
-    role: "Board Director",
+    role: "Board Member",
     edu: "MBA, BA in Management",
     img: "/kalkidan.png",
     education: [
@@ -122,7 +123,7 @@ const boardMembers: MemberType[] = [
   },
   {
     name: "Banteyrga Kebede",
-    role: "Board Director",
+    role: "Board Member",
     edu: "MBA, BA in Management",
     img: "/banteyrga.png",
     education: [
