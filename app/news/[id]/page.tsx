@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronLeft, ZoomIn, Copy, Twitter, Linkedin, Instagram, Send } from "lucide-react";
+import { ChevronLeft, ZoomIn, Copy, Twitter, Linkedin, Instagram, Send, Check } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useBlogById } from "@/hooks/queries/useNewsQuery";
 import { Block, ParagraphBlock, HeadingBlock, ImageBlock, YoutubeBlock, LinkBlock } from "@/services/news";
@@ -74,6 +74,9 @@ const NewsDetailPage = () => {
   const [lightboxImages, setLightboxImages] = useState<string[]>([]);
   const [lightboxIndex, setLightboxIndex] = useState(0);
 
+  // Copy link state
+  const [isCopied, setIsCopied] = useState(false);
+
   const openLightbox = (images: string[], index: number) => {
     if (!images || images.length === 0) return;
     setLightboxImages(images);
@@ -127,10 +130,17 @@ const NewsDetailPage = () => {
               <div className="rounded-2xl border border-gray-200/80 bg-white/70 backdrop-blur-sm p-5 shadow-sm flex flex-wrap gap-3 items-center">
                 <span className="text-sm font-semibold text-textPrimary">Share this article:</span>
                 <button
-                  onClick={() => typeof window !== "undefined" && navigator.clipboard.writeText(window.location.href)}
+                  onClick={() => {
+                    if (typeof window !== "undefined") {
+                      navigator.clipboard.writeText(window.location.href);
+                      setIsCopied(true);
+                      setTimeout(() => setIsCopied(false), 2000);
+                    }
+                  }}
                   className="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-gray-50 hover:bg-gray-100 text-sm"
                 >
-                  <Copy className="w-4 h-4" /> Copy link
+                  {isCopied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                  {isCopied ? "Copied" : "Copy link"}
                 </button>
                 <button
                   onClick={() => {
