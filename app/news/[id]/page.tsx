@@ -137,7 +137,7 @@ const NewsDetailPage = () => {
                       setTimeout(() => setIsCopied(false), 2000);
                     }
                   }}
-                  className="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-gray-50 hover:bg-gray-100 text-sm"
+                  className="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-gray-50 hover:bg-gray-100 text-sm cursor-pointer"
                 >
                   {isCopied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                   {isCopied ? "Copied" : "Copy link"}
@@ -148,7 +148,7 @@ const NewsDetailPage = () => {
                     const t = encodeURIComponent(blog.title.en);
                     window.open(`https://twitter.com/intent/tweet?url=${u}&text=${t}`, "_blank", "noopener");
                   }}
-                  className="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-[#1DA1F2]/10 text-[#1DA1F2] hover:bg-[#1DA1F2]/20 text-sm"
+                  className="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-[#1DA1F2]/10 text-[#1DA1F2] hover:bg-[#1DA1F2]/20 text-sm cursor-pointer"
                 >
                   <Twitter className="w-4 h-4" /> Tweet
                 </button>
@@ -157,7 +157,7 @@ const NewsDetailPage = () => {
                     const u = encodeURIComponent(typeof window !== "undefined" ? window.location.href : "");
                     window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${u}`, "_blank", "noopener");
                   }}
-                  className="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-[#0A66C2]/10 text-[#0A66C2] hover:bg-[#0A66C2]/20 text-sm"
+                  className="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-[#0A66C2]/10 text-[#0A66C2] hover:bg-[#0A66C2]/20 text-sm cursor-pointer"
                 >
                   <Linkedin className="w-4 h-4" /> Share
                 </button>
@@ -166,7 +166,7 @@ const NewsDetailPage = () => {
                     const u = encodeURIComponent(typeof window !== "undefined" ? window.location.href : "");
                     window.open(`https://www.instagram.com/create/story/?url=${u}`, "_blank", "noopener");
                   }}
-                  className="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-[#E4405F]/10 text-[#E4405F] hover:bg-[#E4405F]/20 text-sm"
+                  className="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-[#E4405F]/10 text-[#E4405F] hover:bg-[#E4405F]/20 text-sm cursor-pointer"
                 >
                   <Instagram className="w-4 h-4" /> Instagram
                 </button>
@@ -176,7 +176,7 @@ const NewsDetailPage = () => {
                     const t = encodeURIComponent(blog.title.en);
                     window.open(`https://t.me/share/url?url=${u}&text=${t}`, "_blank", "noopener");
                   }}
-                  className="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-[#0088CC]/10 text-[#0088CC] hover:bg-[#0088CC]/20 text-sm"
+                  className="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-[#0088CC]/10 text-[#0088CC] hover:bg-[#0088CC]/20 text-sm cursor-pointer"
                 >
                   <Send className="w-4 h-4" /> Telegram
                 </button>
