@@ -14,6 +14,7 @@ import {
   Earth,
   Banknote,
   Sliders,
+  Crown,
 } from "lucide-react";
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 const fadeInUp = {
@@ -326,7 +327,7 @@ export default function About() {
             className="bg-white border border-gray-200 rounded-2xl p-6 shadow-md hover:shadow-xl space-y-2 hover:border-[#0E0066]"
           >
             <div className="mb-2 inline-flex items-center justify-center bg-[#2014FF]/10 text-[#2014FF] w-10 h-10 rounded-full">
-              {/* <Users size={18} /> */}
+              <Crown size={18} />
             </div>
             <h3 className="font-semibold text-[#0E0066] ">
               Board of Directors
@@ -388,7 +389,7 @@ export default function About() {
 
       <section className="py-4 pb-16 px-6 md:px-12 text-center">
         <motion.div {...fadeInUp}>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-[#0E0066] my-4 mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#0E0066] my-4 mb-12">
             Corporate Social Responsibility
           </h2>
         </motion.div>
