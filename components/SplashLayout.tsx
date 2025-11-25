@@ -1,92 +1,58 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Image from "next/image";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
+import { Mail, Clock, Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
 
-const SPLASH_DURATION_MS = 3000;
-
-export default function SplashLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const [isSplashVisible, setIsSplashVisible] = useState(true);
-
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    );
-
-    if (prefersReducedMotion.matches) {
-      const instantHide = window.setTimeout(() => {
-        setIsSplashVisible(false);
-      }, 0);
-
-      return () => window.clearTimeout(instantHide);
-    }
-
-    const timeout = window.setTimeout(() => {
-      setIsSplashVisible(false);
-    }, SPLASH_DURATION_MS);
-
-    return () => {
-      window.clearTimeout(timeout);
-    };
-  }, []);
-
+export default function SplashLayout({ children }: { children: React.ReactNode }) {
   return (
-    <>
-      {isSplashVisible && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
-          <Image
-            src="/logo.png"
-            alt="Prime Capital logo"
-            width={400}
-            height={180}
-            priority
-            className="sparkle-logo"
-          />
-          <style jsx>{`
-            .sparkle-logo {
-              animation: sparkle 1500ms ease-in-out infinite;
-              filter: drop-shadow(0 0 0 rgba(20, 28, 255, 0));
-            }
-
-            @keyframes sparkle {
-              0%,
-              100% {
-                filter: drop-shadow(0 0 0 rgba(20, 28, 255, 0));
-                transform: scale(1);
-              }
-              50% {
-                filter: drop-shadow(0 0 18px rgba(20, 28, 255, 0.5));
-                transform: scale(1.04);
-              }
-            }
-
-            @media (prefers-reduced-motion: reduce) {
-              .sparkle-logo {
-                animation: none;
-                filter: none;
-              }
-            }
-          `}</style>
-        </div>
-      )}
-
-      <div
-        className={`min-h-screen transition-opacity duration-500 ease-out ${
-          isSplashVisible ? "opacity-0" : "opacity-100"
-        }`}
-        aria-hidden={isSplashVisible}
-        aria-busy={isSplashVisible}
+    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-gradient-to-br from-blue-900 via-blue-700 to-blue-500 text-white p-6">
+      {/* Animated Logo */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1 }}
       >
-        <Navbar />
-        {children}
-        <Footer />
+        <Image
+          src="/logoblack.png"
+          alt="Prime Capital logo"
+          width={300}
+          height={180}
+          priority
+          className="drop-shadow-xl mb-8"
+        />
+      </motion.div>
+
+      {/* Title */}
+      <motion.h1
+        className="text-3xl md:text-5xl font-extrabold tracking-wide flex items-center gap-2"
+        animate={{ opacity: [0.5, 1, 0.5] }}
+        transition={{ repeat: Infinity, duration: 2 }}
+      >
+        <Sparkles className="w-8 h-8" /> COMING SOON <Sparkles className="w-8 h-8" />
+      </motion.h1>
+
+      {/* Subtitle */}
+      <p className="text-center mt-4 max-w-md text-blue-100 text-lg">
+        We’re coming soon. Stay tuned, the future is almost here.
+      </p>
+
+      {/* Icon Row */}
+      <div className="flex gap-6 mt-8">
+        <div className="flex flex-col items-center">
+          <Clock className="w-10 h-10 opacity-80" />
+          <span className="mt-2 text-sm opacity-90">Launching Soon</span>
+        </div>
+        <div className="flex flex-col items-center">
+          <Mail className="w-10 h-10 opacity-80" />
+          <span className="mt-2 text-sm opacity-90">Stay Updated</span>
+        </div>
       </div>
-    </>
+
+      {/* Footer */}
+      <p className="absolute bottom-6 text-xs text-blue-200">
+        © {new Date().getFullYear()} Prime Capital. All rights reserved.
+      </p>
+    </div>
   );
 }
