@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
-import Navbar from "./Navbar";
 
 export default function Hero() {
   return (

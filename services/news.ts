@@ -98,7 +98,7 @@ export const getPublishedNews = async (params?: {
   order?: "asc" | "desc";
   sort?: "asc" | "desc";
 }): Promise<PublishedNewsApiResponse> => {
-  const queryParams: Record<string, any> = {};
+  const queryParams: Record<string, string | number> = {};
 
   if (params) {
     if (typeof params.page !== "undefined") queryParams.page = params.page;

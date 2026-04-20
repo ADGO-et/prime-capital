@@ -254,9 +254,9 @@ const execMembers: MemberType[] = [
 export default function OurTeamPage() {
   const [selected, setSelected] = useState<MemberType | null>(null);
 
-  function getPlatformIcon(platform: string): import("react").ReactNode {
-    throw new Error("Function not implemented.");
-  }
+  // function getPlatformIcon(platform: string): import("react").ReactNode {
+  //   throw new Error("Function not implemented.");
+  // }
 
   return (
     <main className="min-h-screen w-full bg-white text-gray-900 overflow-x-hidden">
@@ -497,7 +497,7 @@ export default function OurTeamPage() {
                   <span className="text-xs text-[#504785] italic">Click for more detail</span>
                 </div>
 
-                {m.socialLinks && m.socialLinks.length > 0 && (
+                {/* {m.socialLinks && m.socialLinks.length > 0 && (
                   <div className="flex gap-3 mt-2">
                     {m.socialLinks.map((link) => (
                       <button
@@ -512,7 +512,7 @@ export default function OurTeamPage() {
                       </button>
                     ))}
                   </div>
-                )}
+                )} */}
               </div>
             </motion.div>
           ))}
