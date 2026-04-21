@@ -351,7 +351,7 @@ export default function About() {
         </motion.div>
 
         <div className="mt-1 flex justify-center">
-          <img src='/organization.png' className="max-h-[70rem] w-auto object-contain my-2"/>
+          <img src='/organization.png' className="max-h-[70rem] w-auto object-contain my-10"/>
         </div>
       </section>
 
