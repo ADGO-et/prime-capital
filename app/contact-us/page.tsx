@@ -21,7 +21,7 @@ export default function Contact() {
                 <span className="mt-1 text-[#2014FF]"><MapPin size={20} /></span>
                 <div>
                   <div className="font-semibold text-[#0E0066]">Visit Us</div>
-                  <p className="text-sm text-[#504785]">Bole japan Entoto building<br/>12th floor</p>
+                  <p className="text-sm text-[#504785]">Bole Road, Abyssinia Real Estate bldg<br/>(12th floor) adjacent to Ethio Ceramics</p>
                 </div>
               </li>
               <li className="flex items-start gap-3">
