@@ -99,7 +99,7 @@ export default function Footer() {
                   <div className="p-2 rounded-md bg-white/10 flex items-center justify-center hover:bg-accent/20 transition">
                     <FaMapMarkerAlt className="text-accent text-base" />
                   </div>
-                  <span>Bole japan Entoto building 12th floor</span>
+                  <span>Bole Road, Abyssinia Real Estate bldg (12th floor) adjacent to Ethio Ceramics</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <div className="p-2 rounded-md bg-white/10 flex items-center justify-center hover:bg-accent/20 transition">
