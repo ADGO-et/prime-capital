@@ -19,13 +19,15 @@ interface Slide {
   }[];
 }
 
+const repeatedDescription =
+  "Prime Capital S.C. — Innovation, Integrity, and Excellence in Investment Banking";
+
 const slides: Slide[] = [
   {
     id: 1,
     image: "/image1.png",
     title: "Empowering Ethiopia's Financial Future",
-    description:
-      "Prime Capital S.C. — Innovation, Integrity, and Excellence in Investment Banking",
+    description: repeatedDescription,
     alignment: "center",
     buttons: [
       { text: "Explore Our Services", href: "/services", variant: "primary" },
@@ -52,6 +54,27 @@ const slides: Slide[] = [
       { text: "Join Our Team", href: "/vacancy", variant: "primary" },
       { text: "Contact Us", href: "/contact-us", variant: "secondary" },
     ],
+  },
+  {
+    id: 4,
+    image: "/image-1.jpg",
+    title: "Prime Capital in Motion",
+    description: repeatedDescription,
+    alignment: "center",
+  },
+  {
+    id: 5,
+    image: "/image-3.jpg",
+    title: "Trusted Financial Leadership",
+    description: repeatedDescription,
+    alignment: "right",
+  },
+  {
+    id: 6,
+    image: "/image-4.jpg",
+    title: "Driving Market Confidence",
+    description: repeatedDescription,
+    alignment: "center",
   },
 ];
 
