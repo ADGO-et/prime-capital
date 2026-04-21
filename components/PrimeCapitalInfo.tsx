@@ -15,7 +15,7 @@ export default function PrimeCapitalInfo() {
         <div className="flex-1 space-y-5">
           {/* Gradient Title */}
           <h1 className="text-3xl md:text-4xl font-bold leading-tight bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-            Ethiopia&apos;s Dedicated Investment <br/> Banking
+            Ethiopia&apos;s Dedicated Investment <br/>  Banking
             Institution
           </h1>
 
