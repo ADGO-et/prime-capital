@@ -73,6 +73,30 @@ const boardMembers: MemberType[] = [
     edu: "MBA in Telecom Business Administration, BA in Management",
     img: "/banteyerga.jpg",
     summary:"He holds an MBA in Telecom Business Administration and a BA in Management from Addis Ababa University. With over 15 years of leadership experience across telecom, manufacturing, and service sectors, he currently serves as Managing Partner at Chartered Advisory Services PLC and Board Member of NEO Microfinance Institution. Throughout his career, he has held senior roles including CEO and Managing Partner, leading organizational restructuring, operational improvements, and product development initiatives. He has also driven profitability growth, ISO certifications, and HR transformation programs, and is recognized for his strong expertise in leadership, operations, finance, and telecom innovation."
+  },
+  {
+    name: "Yitages Tefera",
+    role: "Board Member",
+    edu: "Fellow of the Association of Chartered Certified Accountants (FCCA, UK)",
+    appointed:true,
+    img: "/yitages.jpg",
+    summary:"He is a Fellow of the Association of Chartered Certified Accountants (FCCA) from Association of Chartered Certified Accountants and a member of the Institute of Chartered Certified Accountants. With over 10 years of experience in auditing, accounting, and risk management, he specializes in audit and assurance services, IFRS and IPSAS consulting, and financial statement preparation and analysis. He has led audit engagements for both business and non-profit organizations, ensuring compliance with international financial reporting standards and Ethiopian legal frameworks, while also providing financial oversight, risk assessment, and advisory services."
+  },
+  {
+    name: "Getahun Worku",
+    role: "Board Member",
+    edu: "Bachelors of art in Accounting and finance",
+    appointed:true,
+    img: "/getahun.jpg",
+    summary:"He holds an LLM in Human Rights and an MBA in Governance and Development, and is currently pursuing a PhD in Law. With over 20 years of experience in legal advisory, compliance, governance, and academic instruction in Ethiopia, she specializes in contract law, labor law, procurement, banking regulation, donor agreements, and institutional governance frameworks. She has provided high-level legal counsel on grant agreements, MOUs, project design, monitoring, and regulatory compliance. Her career includes senior legal roles at NIB International Bank and the Commercial Bank of Ethiopia, alongside academic and advisory positions in higher education and legal institutions. She is a licensed advocate before all Federal Courts of Ethiopia and a member of both the Ethiopian Bar Association and Ethiopian Women Lawyers Association, with strong expertise in governance, compliance, and organizational risk management."
+  },
+  {
+    name: "Assan Mohammed Ali",
+    role: "Board Member",
+    edu: "MBA in IT Management",
+    appointed:true,
+    img: "/placeholder.png",
+    summary:"He holds an MBA in IT Management, an MSc in Information Technology, and a BSc in Computer Science. With over 20 years of experience in digital transformation and IT leadership, he specializes in enterprise systems management, IT governance, and financial technology innovation. He has led major telecom and banking projects, including ERP, BSS/OSS, CRM, billing systems, and digital financial services, with a strong focus on Sharia-compliant Islamic banking solutions. His career includes senior roles at Hijra Bank and Ethio Telecom, where he worked on core banking systems, mobile wallets, business intelligence, and enterprise IT architecture. He provides strategic leadership in digital transformation, retail banking growth, and technology governance, driving innovation and operational resilience."
   }
 ];
 
@@ -108,30 +132,6 @@ const execMembers: MemberType[] = [
     appointed:true,
     img: "/agazi.jpg",
     summary:"He holds bachelor’s degrees in Accounting and Finance, as well as Management. He works in financial trading and market analysis, focusing on monitoring global and local economic trends to identify trading opportunities. His experience includes designing, backtesting, and executing trading strategies across stocks, bonds, and treasury bills using firm capital. He applies strict risk management practices, maintains detailed trade records, and reports performance insights to management, contributing to data-driven investment decision-making."
-  },
-{
-    name: "Yitages Tefera",
-    role: "Board Director & financial management professional",
-    edu: "Fellow of the Association of Chartered Certified Accountants (FCCA, UK)",
-    appointed:true,
-    img: "/yitages.jpg",
-    summary:"He is a Fellow of the Association of Chartered Certified Accountants (FCCA) from Association of Chartered Certified Accountants and a member of the Institute of Chartered Certified Accountants. With over 10 years of experience in auditing, accounting, and risk management, he specializes in audit and assurance services, IFRS and IPSAS consulting, and financial statement preparation and analysis. He has led audit engagements for both business and non-profit organizations, ensuring compliance with international financial reporting standards and Ethiopian legal frameworks, while also providing financial oversight, risk assessment, and advisory services."
-  },
-  {
-    name: "Getahun Worku",
-    role: "Board Director",
-    edu: "Bachelors of art in Accounting and finance",
-    appointed:true,
-    img: "/getahun.jpg",
-    summary:"He holds an LLM in Human Rights and an MBA in Governance and Development, and is currently pursuing a PhD in Law. With over 20 years of experience in legal advisory, compliance, governance, and academic instruction in Ethiopia, she specializes in contract law, labor law, procurement, banking regulation, donor agreements, and institutional governance frameworks. She has provided high-level legal counsel on grant agreements, MOUs, project design, monitoring, and regulatory compliance. Her career includes senior legal roles at NIB International Bank and the Commercial Bank of Ethiopia, alongside academic and advisory positions in higher education and legal institutions. She is a licensed advocate before all Federal Courts of Ethiopia and a member of both the Ethiopian Bar Association and Ethiopian Women Lawyers Association, with strong expertise in governance, compliance, and organizational risk management."
-  },
-  {
-    name: "Hassen Mohammed Ali",
-    role: "Board Director & digital banking executive",
-    edu: "MBA in IT Management",
-    appointed:true,
-    img: "/placeholder.png",
-    summary:"He holds an MBA in IT Management, an MSc in Information Technology, and a BSc in Computer Science. With over 20 years of experience in digital transformation and IT leadership, he specializes in enterprise systems management, IT governance, and financial technology innovation. He has led major telecom and banking projects, including ERP, BSS/OSS, CRM, billing systems, and digital financial services, with a strong focus on Sharia-compliant Islamic banking solutions. His career includes senior roles at Hijra Bank and Ethio Telecom, where he worked on core banking systems, mobile wallets, business intelligence, and enterprise IT architecture. He provides strategic leadership in digital transformation, retail banking growth, and technology governance, driving innovation and operational resilience."
   },
 ];
 
@@ -323,7 +323,7 @@ export default function OurTeamPage() {
 
         <motion.div
           {...staggerContainer}
-          className="mt-10 grid gap-8 sm:grid-cols-1 md:grid-cols-4 max-w-7xl mx-auto justify-center justify-items-center"
+          className="mt-10 grid gap-8 sm:grid-cols-1 md:grid-cols-3 max-w-7xl mx-auto"
         >
           {execMembers.slice(1).map((m, i) => (
             <motion.div
