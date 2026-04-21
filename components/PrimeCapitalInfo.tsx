@@ -22,8 +22,7 @@ export default function PrimeCapitalInfo() {
 
           {/* Subtitle Paragraph 1 */}
           <p className="text-sm md:text-base text-gray-700 leading-relaxed">
-            Founded in 2016 E.C. with <strong>ETB 25 million</strong> paid-up
-            capital, Prime Capital S.C. stands as Ethiopia&apos;s first
+            Founded in 2016 E.C, Prime Capital S.C. stands as Ethiopia&apos;s first
             dedicated investment banking institution — built on the pillars of{" "}
             <strong>innovation, integrity, and excellence</strong> to shape the
             nation&apos;s financial future.
