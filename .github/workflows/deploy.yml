@@ -33,10 +33,10 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           command_timeout: 15m
           script: |
-            if [ ! -d /opt/prime-capital ]; then
-              git clone https://github.com/ADGO-et/prime-capital.git /opt/prime-capital
+            if [ ! -d /home/test/prime-capital ]; then
+              git clone https://github.com/ADGO-et/prime-capital.git /home/test/prime-capital
             fi
-            cd /opt/prime-capital
+            cd /home/test/prime-capital
             git fetch origin main
             git reset --hard origin/main
             docker build -t prime-capital:latest .
