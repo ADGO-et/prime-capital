@@ -1,0 +1,7 @@
+services:
+  prime-capital:
+    image: ghcr.io/adgo-et/prime-capital:latest
+    container_name: prime-capital
+    restart: always
+    ports:
+      - "3034:80"

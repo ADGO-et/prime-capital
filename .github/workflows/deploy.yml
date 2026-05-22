@@ -49,6 +49,15 @@ jobs:
             ${{ env.IMAGE }}:latest
             ${{ env.IMAGE }}:${{ github.sha }}
 
+      - name: Copy compose file to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: docker-compose.yml
+          target: /home/test/prime-capital/
+
       - name: Deploy on server
         uses: appleboy/ssh-action@v1
         with:
@@ -57,11 +66,8 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           command_timeout: 20m
           script: |
-            docker pull ghcr.io/adgo-et/prime-capital:latest
-            docker rm -f prime-capital 2>/dev/null || true
-            docker run -d \
-              --name prime-capital \
-              --restart always \
-              -p 3034:3000 \
-              ghcr.io/adgo-et/prime-capital:latest
+            mkdir -p /home/test/prime-capital
+            cd /home/test/prime-capital
+            docker compose pull
+            docker compose up -d
             echo "Deployed at $(date)"
