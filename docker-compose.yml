@@ -4,4 +4,4 @@ services:
     container_name: prime-capital
     restart: always
     ports:
-      - "3034:80"
+      - "3034:3000"
