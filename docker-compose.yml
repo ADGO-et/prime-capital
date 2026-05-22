@@ -1,6 +1,6 @@
 services:
   prime-capital:
-    image: ghcr.io/adgo-et/prime-capital:latest
+    image: 196.189.51.108:5000/prime-capital:latest
     container_name: prime-capital
     restart: always
     ports:
