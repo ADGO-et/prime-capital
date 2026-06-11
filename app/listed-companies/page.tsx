@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import Link from "next/link";
 import ListedCompaniesHero from "@/components/listed-companies-hero";
-import MarketPrices from "@/components/MarketPrices";
+// import MarketPrices from "@/components/MarketPrices";
 
 interface CompanyData {
   symbol: string;
@@ -57,7 +57,7 @@ export default function ResourcesPage() {
 
   return (
     <main className="min-h-screen w-full bg-white text-gray-900">
-      <MarketPrices />
+      {/* <MarketPrices /> */}
       <ListedCompaniesHero />
       <div className="max-w-5xl mx-auto px-4 py-12 md:py-16">
 
