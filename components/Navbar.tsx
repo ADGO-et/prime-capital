@@ -103,13 +103,13 @@ export default function Navbar() {
                     >
                       <div className="font-semibold text-white drop-shadow-sm">News and Updates</div>
                     </Link>
-                    <Link
+                    {/* <Link
                       href="/listed-companies"
                       className="block px-4 py-3 rounded-lg hover:bg-white/15 transition-colors duration-200 whitespace-normal"
                       onClick={() => setDropdownOpen(false)}
                     >
                       <div className="font-semibold text-white drop-shadow-sm">ESX Listed Companies</div>
-                    </Link>
+                    </Link> */}
                     <Link
                       href="/vacancy"
                       className="block px-4 py-3 rounded-lg hover:bg-white/15 transition-colors duration-200 whitespace-normal"
