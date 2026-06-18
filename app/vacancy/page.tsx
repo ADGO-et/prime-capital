@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Lightbulb, Globe, Users, BookOpen, HeartHandshake, TrendingUp } from 'lucide-react'
-import MarketPrices from '../../components/MarketPrices'
+// import MarketPrices from '../../components/MarketPrices'
 
 const reasons = [
   {
@@ -41,7 +41,7 @@ const reasons = [
 const VacancyLandingPage = () => {
   return (
     <div className="pb-24 bg-white">
-      <MarketPrices />
+      {/* <MarketPrices /> */}
       {/* World-Class Hero Section */}
       <section className="relative min-h-[65vh] w-full overflow-hidden bg-linear-to-br from-[#01016F] via-[#141CFF] to-[#2014FF] backdrop-blur-2xl flex items-center justify-center">
         {/* Animated Background Elements */}
