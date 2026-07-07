@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo } from "react"
 import { useGetVacancyQuery } from "@/hooks/queries/useVacancyQuery"
+import { JobVacancy, JobLevel, EmploymentType } from "@/services/vacancy"
 import {
   Card,
   CardContent,
@@ -28,21 +29,6 @@ import {
 import { MapPin, Briefcase, AlertCircle, ArrowLeft } from "lucide-react"
 import { Skeleton } from "@/components/ui/skeleton"
 import Link from "next/link"
-
-interface Job {
-  id:string
-  job_title: string
-  info_tags: { items: string }[]
-  level: string
-  period: string
-  creation_time: string
-  location?: string
-  overview: string
-  key_responsibilities: { items: string }[]
-  requirements: { items: string }[]
-  what_we_offer: { items: string }[]
-  apply_link: string
-}
 
 const JobSkeleton = () => (
   <div className="space-y-4">
@@ -104,75 +90,29 @@ const JobDetailSkeleton = () => (
     </Card>
 )
 
-
 export function JobOpportunities() {
-  // The published vacancies API returns language-agnostic content.
-  const [selectedLevel, setSelectedLevel] = useState("All")
-  const [selectedType, setSelectedType] = useState("All")
-  const [selectedJob, setSelectedJob] = useState<Job | null>(null)
+  const [selectedLevel, setSelectedLevel] = useState<"All" | JobLevel>("All")
+  const [selectedType, setSelectedType] = useState<"All" | EmploymentType>("All")
+  const [selectedJob, setSelectedJob] = useState<JobVacancy | null>(null)
   const [currentPage, setCurrentPage] = useState(1)
   const jobsPerPage = 5
-
-  // The published vacancies API returns a VacancyResponse shape.
-  // Map it into the component's `Job` shape so the rest of the component can remain unchanged.
-  // map UI values to API-expected unions
-  const levelMap: Record<string, "junior" | "intermediate" | "senior"> = {
-    Junior: "junior",
-    Intermediate: "intermediate",
-    Senior: "senior",
-  }
-
-  const periodMap: Record<string, "fulltime" | "part-time"> = {
-    FullTime: "fulltime",
-    PartTime: "part-time",
-  }
-
-  const levelParam = selectedLevel === "All" ? undefined : levelMap[selectedLevel]
-  const periodParam = selectedType === "All" ? undefined : periodMap[selectedType]
 
   const { data, error, isLoading } = useGetVacancyQuery({
     page: currentPage,
     limit: jobsPerPage,
-    level: levelParam,
-    period: periodParam,
+    level: selectedLevel === "All" ? undefined : selectedLevel,
+    employmentType: selectedType === "All" ? undefined : selectedType,
   })
 
-  const jobs = useMemo(() => {
-    const vacancies = data?.data?.vacancies ?? []
-    return vacancies.map((v) => ({
-      id: v._id,
-      job_title: v.job_title,
-      info_tags: (v.info_tags || []).map((t) => ({ items: t })),
-      level: v.level,
-      period: v.period,
-      creation_time: v.createdAt,
-      location: v.location,
-      overview: v.overview,
-      key_responsibilities: (v.responsibilities || []).map((r) => ({ items: r })),
-      requirements: (v.requirements || []).map((r) => ({ items: r })),
-      what_we_offer: (v.offer || []).map((o) => ({ items: o })),
-      apply_link: v.apply,
-    }))
-  }, [data])
-
-  const meta = useMemo(() => {
-    const pagination = data?.data?.pagination
-    if (!pagination) return null
-    return {
-      total: pagination.total,
-      pageCount: pagination.totalPages,
-      page: pagination.page,
-      limit: pagination.limit,
-    }
-  }, [data])
+  const jobs = useMemo(() => data?.vacancies ?? [], [data])
+  const pagination = data?.pagination
 
   useEffect(() => {
     if (jobs.length > 0) {
-      // Keep the previous selection if it still exists, otherwise pick first
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedJob((prev) => {
         if (!prev) return jobs[0]
-        const existing = jobs.find((j: Job) => String(j.id) === String(prev.id))
+        const existing = jobs.find((j) => j.documentId === prev.documentId)
         return existing || jobs[0]
       })
     } else {
@@ -180,28 +120,24 @@ export function JobOpportunities() {
     }
   }, [jobs])
 
-  const handleReadMore = (job: Job) => {
-    setSelectedJob(job)
-  }
-
   const handleLevelChange = (level: string) => {
-    setSelectedLevel(level)
+    setSelectedLevel(level as "All" | JobLevel)
     setCurrentPage(1)
   }
 
   const handleTypeChange = (type: string) => {
-    setSelectedType(type)
+    setSelectedType(type as "All" | EmploymentType)
     setCurrentPage(1)
   }
 
   const handlePageChange = (page: number) => {
-    if (page > 0 && page <= (meta?.pageCount || 1)) {
+    if (page > 0 && page <= (pagination?.pageCount || 1)) {
       setCurrentPage(page)
     }
   }
 
-  const levels = ["All", "Junior", "Intermediate", "Senior"]
-  const types = ["All", "FullTime", "PartTime"]
+  const levels: ("All" | JobLevel)[] = ["All", "Junior", "Intermediate", "Senior"]
+  const types: ("All" | EmploymentType)[] = ["All", "Full-time", "Part-time"]
 
   return (
     <section className="relative py-20 px-4 bg-white text-gray-900">
@@ -263,31 +199,31 @@ export function JobOpportunities() {
             ) : (
               <>
                 <div className="flex-1 space-y-4 overflow-y-auto">
-                  {jobs.map((job: Job) => (
+                  {jobs.map((job) => (
                     <Card
-                      key={job.id}
+                      key={job.documentId}
                       className="cursor-pointer transition-all hover:shadow-lg border-blue-200 bg-blue-50 text-gray-900 hover:bg-blue-100"
-                      onClick={() => handleReadMore(job)}
+                      onClick={() => setSelectedJob(job)}
                     >
                       <CardHeader className="pb-3 border-b border-blue-200">
-                        <CardTitle className="text-lg font-semibold text-[#0E0066]">{job.job_title}</CardTitle>
+                        <CardTitle className="text-lg font-semibold text-[#0E0066]">{job.title}</CardTitle>
                       </CardHeader>
                       <CardContent className="space-y-4">
                         <div className="flex flex-wrap gap-2 mt-2">
-                          {job.info_tags.map(tag => (
-                            <Badge key={tag.items} className="bg-blue-200 text-blue-800 border border-blue-300">
-                              {tag.items}
+                          {(job.infoTags ?? []).map((tag) => (
+                            <Badge key={tag.id} className="bg-blue-200 text-blue-800 border border-blue-300">
+                              {tag.value}
                             </Badge>
                           ))}
                           <Badge className="bg-blue-200 text-blue-800 border border-blue-300">{job.level}</Badge>
-                          <Badge className="bg-blue-200 text-blue-800 border border-blue-300">{job.period}</Badge>
+                          <Badge className="bg-blue-200 text-blue-800 border border-blue-300">{job.employmentType}</Badge>
                         </div>
                         <div className="flex items-center justify-between">
-                          <span className="text-sm text-gray-500">{new Date(job.creation_time).toLocaleDateString()}</span>
+                          <span className="text-sm text-gray-500">{new Date(job.createdAt).toLocaleDateString()}</span>
                           <Button
                             variant="ghost"
                             className="text-blue-600 hover:text-blue-700 hover:bg-blue-200 p-0 h-auto font-medium"
-                            onClick={() => handleReadMore(job)}
+                            onClick={() => setSelectedJob(job)}
                           >
                             Read More →
                           </Button>
@@ -296,7 +232,7 @@ export function JobOpportunities() {
                     </Card>
                   ))}
                 </div>
-                {meta && meta.pageCount > 1 && (
+                {pagination && pagination.pageCount > 1 && (
                   <div className="mt-6">
                     <Pagination>
                       <PaginationContent className="text-gray-900">
@@ -306,7 +242,7 @@ export function JobOpportunities() {
                             className={currentPage === 1 ? "pointer-events-none opacity-50" : "cursor-pointer hover:bg-blue-50"}
                           />
                         </PaginationItem>
-                        {Array.from({ length: meta.pageCount }, (_, i) => i + 1).map((page) => (
+                        {Array.from({ length: pagination.pageCount }, (_, i) => i + 1).map((page) => (
                           <PaginationItem key={page}>
                             <PaginationLink
                               onClick={() => handlePageChange(page)}
@@ -320,7 +256,7 @@ export function JobOpportunities() {
                         <PaginationItem>
                           <PaginationNext
                             onClick={() => handlePageChange(currentPage + 1)}
-                            className={currentPage === meta.pageCount ? "pointer-events-none opacity-50" : "cursor-pointer hover:bg-blue-50"}
+                            className={currentPage === pagination.pageCount ? "pointer-events-none opacity-50" : "cursor-pointer hover:bg-blue-50"}
                           />
                         </PaginationItem>
                       </PaginationContent>
@@ -339,14 +275,14 @@ export function JobOpportunities() {
                 <CardHeader className="border-b border-blue-200">
                   <div className="flex items-start justify-between">
                     <div>
-                      <CardTitle className="text-xl font-bold text-[#0E0066] mb-2">{selectedJob.job_title}</CardTitle>
+                      <CardTitle className="text-xl font-bold text-[#0E0066] mb-2">{selectedJob.title}</CardTitle>
                       <div className="flex flex-wrap gap-2 mb-2">
-                        {selectedJob.info_tags.map(tag => <Badge key={tag.items} className="bg-blue-200 text-blue-800 border border-blue-300">{tag.items}</Badge>)}
+                        {(selectedJob.infoTags ?? []).map((tag) => <Badge key={tag.id} className="bg-blue-200 text-blue-800 border border-blue-300">{tag.value}</Badge>)}
                         <Badge className="bg-blue-200 text-blue-800 border border-blue-300">{selectedJob.level}</Badge>
-                        <Badge className="bg-blue-200 text-blue-800 border border-blue-300">{selectedJob.period}</Badge>
+                        <Badge className="bg-blue-200 text-blue-800 border border-blue-300">{selectedJob.employmentType}</Badge>
                       </div>
                     </div>
-                    <span className="text-sm text-gray-500">{new Date(selectedJob.creation_time).toLocaleDateString()}</span>
+                    <span className="text-sm text-gray-500">{new Date(selectedJob.createdAt).toLocaleDateString()}</span>
                   </div>
                   <p className="text-sm text-gray-600 mt-2 flex items-center gap-1">
                     <MapPin className="w-4 h-4 text-blue-600" /> {selectedJob.location || "Addis Ababa, Ethiopia"}
@@ -355,14 +291,14 @@ export function JobOpportunities() {
                 <CardContent className="flex-1 overflow-y-auto space-y-6">
                   <div>
                     <h3 className="font-semibold text-[#0E0066] mb-2">Overview</h3>
-                    <p className="text-gray-700 text-sm leading-relaxed">{selectedJob.overview}</p>
+                    <p className="text-gray-700 text-sm leading-relaxed">{selectedJob.description}</p>
                   </div>
                   <div>
                     <h3 className="font-semibold text-[#0E0066] mb-3">Key Responsibilities</h3>
-                    {selectedJob.key_responsibilities.length > 0 ? (
+                    {(selectedJob.responsibilities?.length ?? 0) > 0 ? (
                       <ul className="space-y-2 list-disc list-inside">
-                        {selectedJob.key_responsibilities.map((resp, index) => (
-                          <li key={index} className="text-gray-700 text-sm">{resp.items}</li>
+                        {selectedJob.responsibilities!.map((resp) => (
+                          <li key={resp.id} className="text-gray-700 text-sm">{resp.value}</li>
                         ))}
                       </ul>
                     ) : (
@@ -373,26 +309,26 @@ export function JobOpportunities() {
                     )}
                   </div>
                   <div>
-                    <h3 className="font-semibold text-[#0E0066] mb-3">Requirements</h3>
-                    {selectedJob.requirements.length > 0 ? (
+                    <h3 className="font-semibold text-[#0E0066] mb-3">Qualifications</h3>
+                    {(selectedJob.qualifications?.length ?? 0) > 0 ? (
                       <ul className="space-y-2 list-disc list-inside">
-                        {selectedJob.requirements.map((req, index) => (
-                          <li key={index} className="text-gray-700 text-sm">{req.items}</li>
+                        {selectedJob.qualifications!.map((req) => (
+                          <li key={req.id} className="text-gray-700 text-sm">{req.value}</li>
                         ))}
                       </ul>
                     ) : (
                       <div className="flex items-center gap-2 text-gray-500 text-sm">
                         <AlertCircle className="w-4 h-4" />
-                        <span>No requirements listed yet.</span>
+                        <span>No qualifications listed yet.</span>
                       </div>
                     )}
                   </div>
                   <div>
                     <h3 className="font-semibold text-[#0E0066] mb-3">What We Offer</h3>
-                    {selectedJob.what_we_offer.length > 0 ? (
+                    {(selectedJob.whatWeOffer?.length ?? 0) > 0 ? (
                       <ul className="space-y-2 list-disc list-inside">
-                        {selectedJob.what_we_offer.map((offer, index) => (
-                          <li key={index} className="text-gray-700 text-sm">{offer.items}</li>
+                        {selectedJob.whatWeOffer!.map((offer) => (
+                          <li key={offer.id} className="text-gray-700 text-sm">{offer.value}</li>
                         ))}
                       </ul>
                     ) : (
@@ -405,7 +341,7 @@ export function JobOpportunities() {
                 </CardContent>
                 <div className="p-6 border-t border-blue-200 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
                   <Button asChild className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white">
-                    <a href={selectedJob.apply_link} target="_blank" rel="noopener noreferrer">Apply for Position</a>
+                    <a href={selectedJob.applyLink} target="_blank" rel="noopener noreferrer">Apply for Position</a>
                   </Button>
                 </div>
               </Card>

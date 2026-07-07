@@ -4,12 +4,12 @@ import { NewsCard } from "./news-card";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { usePublishedNews } from "@/hooks/queries/useNewsQuery";
-import { ParagraphBlock, Block, Blog } from "@/services/news";
+import { strapiMediaUrl } from "@/lib/strapi";
 
 export function NewsSection({ type = "related" }: { type?: "related" | "all" }) {
   const router = useRouter();
   const { data, isFetching } = usePublishedNews({ page: 1, limit: 3, sortBy: "latest" });
-  const blogs = data?.data.blogs ?? [];
+  const articles = data?.articles ?? [];
   const formatDate = (iso?: string) => {
     if (!iso) return "";
     const d = new Date(iso);
@@ -53,11 +53,11 @@ export function NewsSection({ type = "related" }: { type?: "related" | "all" }) 
 
       {/* News Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-        {isFetching && blogs.length === 0 &&
+        {isFetching && articles.length === 0 &&
           Array.from({ length: 3 }).map((_, i) => (
             <div key={i} className="h-48 sm:h-64 animate-pulse rounded-lg bg-blue-100 border border-blue-200" />
           ))}
-        {!isFetching && blogs.length === 0 && (
+        {!isFetching && articles.length === 0 && (
           <div className="col-span-full flex flex-col items-center justify-center py-8 sm:py-12 bg-blue-50 border border-blue-200 rounded-2xl">
             <div className="flex items-center justify-center mb-4 text-blue-600">
               <AlertCircle className="w-10 h-10 sm:w-12 sm:h-12" />
@@ -70,24 +70,19 @@ export function NewsSection({ type = "related" }: { type?: "related" | "all" }) 
             </p>
           </div>
         )}
-        {blogs.map((blog: Blog) => {
-          const title = (blog.title?.en || blog.title) as string;
-          const paragraph = blog.blocks.find((b: Block) => b.type === "paragraph") as ParagraphBlock | undefined;
-          const description = paragraph ? ((paragraph.content?.en || paragraph.content) as string) : "";
-          return (
-            <div key={blog._id}>
-              <Link href={`/news/${blog._id}`} className="block h-full">
-                <NewsCard
-                  title={title}
-                  description={description}
-                  image={blog.thumbnail}
-                  category={"News"}
-                  date={formatDate(blog.createdAt)}
-                />
-              </Link>
-            </div>
-          );
-        })}
+        {articles.map((article) => (
+          <div key={article.id}>
+            <Link href={`/news/${article.slug}`} className="block h-full">
+              <NewsCard
+                title={article.title}
+                description={article.excerpt}
+                image={strapiMediaUrl(article.banner?.url)}
+                category={"News"}
+                date={formatDate(article.publishedAt)}
+              />
+            </Link>
+          </div>
+        ))}
       </div>
     </section>
   )

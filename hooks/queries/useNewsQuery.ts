@@ -1,51 +1,31 @@
 import { useQuery } from "@tanstack/react-query";
-import {
-  getPublishedNews,
-  getBlogById,
-  PublishedNewsApiResponse,
-  SingleBlogApiResponse,
-} from "@/services/news";
+import { getPublishedNews, getNewsArticleBySlug } from "@/services/news";
 
-// Query keys for consistent caching
 export const newsQueryKeys = {
   all: ["news"] as const,
-  published: (params?: {
-    page?: number;
-    limit?: number;
-    sortBy?: string;
-    order?: "asc" | "desc";
-    sort?: "asc" | "desc";
-  }) => [...newsQueryKeys.all, "published", params] as const,
-  blog: (id: string) => [...newsQueryKeys.all, "blog", id] as const,
+  published: (params?: { page?: number; limit?: number; sortBy?: "latest" | "oldest"; query?: string }) =>
+    [...newsQueryKeys.all, "published", params] as const,
+  bySlug: (slug: string) => [...newsQueryKeys.all, "slug", slug] as const,
 };
 
-/**
- * Hook for fetching published news with pagination and sorting
- */
 export const usePublishedNews = (params?: {
   page?: number;
   limit?: number;
-  sortBy?: string;
-  order?: "asc" | "desc";
-  sort?: "asc" | "desc";
+  sortBy?: "latest" | "oldest";
+  query?: string;
 }) => {
-  return useQuery<PublishedNewsApiResponse>({
+  return useQuery({
     queryKey: newsQueryKeys.published(params),
     queryFn: () => getPublishedNews(params),
-    staleTime: 1000 * 60 * 5, // 5 minutes
-    gcTime: 1000 * 60 * 10, // 10 minutes (formerly cacheTime)
+    staleTime: 1000 * 60 * 5,
   });
 };
 
-/**
- * Hook for fetching a single blog by ID
- */
-export const useBlogById = (id: string) => {
-  return useQuery<SingleBlogApiResponse>({
-    queryKey: newsQueryKeys.blog(id),
-    queryFn: () => getBlogById(id),
-    enabled: !!id, // Only run query if id is provided
-    staleTime: 1000 * 60 * 5, // 5 minutes
-    gcTime: 1000 * 60 * 10, // 10 minutes (formerly cacheTime)
+export const useNewsArticleBySlug = (slug: string) => {
+  return useQuery({
+    queryKey: newsQueryKeys.bySlug(slug),
+    queryFn: () => getNewsArticleBySlug(slug),
+    enabled: !!slug,
+    staleTime: 1000 * 60 * 5,
   });
 };

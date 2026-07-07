@@ -3,45 +3,23 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Lightbulb, Globe, Users, BookOpen, HeartHandshake, TrendingUp } from 'lucide-react'
-// import MarketPrices from '../../components/MarketPrices'
+import { useVacancyPage } from '@/hooks/queries/usePagesQuery'
 
-const reasons = [
-  {
-    icon: <Lightbulb className="w-5 h-5" />,
-    title: 'Innovative Mission',
-    body: 'Help shape Ethiopia\'s emerging capital markets and build foundational financial infrastructure.'
-  },
-  {
-    icon: <Users className="w-5 h-5" />,
-    title: 'Inclusive Team Culture',
-    body: 'We value diverse perspectives, open communication, and collaborative problem‑solving.'
-  },
-  {
-    icon: <BookOpen className="w-5 h-5" />,
-    title: 'Continuous Growth',
-    body: 'Access to mentorship, learning resources, and challenging projects that accelerate your career.'
-  },
-  {
-    icon: <Globe className="w-5 h-5" />,
-    title: 'Broader Impact',
-    body: 'Your work contributes to sustainable economic development and empowers local businesses.'
-  },
-  {
-    icon: <HeartHandshake className="w-5 h-5" />,
-    title: 'People‑First Flexibility',
-    body: 'A balanced approach to work & life with supportive policies and autonomy.'
-  },
-  {
-    icon: <TrendingUp className="w-5 h-5" />,
-    title: 'Performance & Ownership',
-    body: 'Clear goals, real responsibility, and recognition for moving the needle.'
-  }
+const reasonIcons = [
+  <Lightbulb key="lightbulb" className="w-5 h-5" />,
+  <Users key="users" className="w-5 h-5" />,
+  <BookOpen key="book" className="w-5 h-5" />,
+  <Globe key="globe" className="w-5 h-5" />,
+  <HeartHandshake key="heart" className="w-5 h-5" />,
+  <TrendingUp key="trending" className="w-5 h-5" />,
 ]
 
 const VacancyLandingPage = () => {
+  const { data: vacancyPage } = useVacancyPage();
+  const reasons = vacancyPage?.reasons ?? [];
+
   return (
     <div className="pb-24 bg-white">
-      {/* <MarketPrices /> */}
       {/* World-Class Hero Section */}
       <section className="relative min-h-[65vh] w-full overflow-hidden bg-linear-to-br from-[#01016F] via-[#141CFF] to-[#2014FF] backdrop-blur-2xl flex items-center justify-center">
         {/* Animated Background Elements */}
@@ -135,13 +113,13 @@ const VacancyLandingPage = () => {
       {/* Why Join Section */}
       <section id="why-join" className="max-w-6xl mx-auto px-4 mt-16 bg-white py-16">
         <div className="mb-10 text-center">
-          <h3 className="text-2xl md:text-3xl font-bold text-[#0E0066]">Why join Prime Capital?</h3>
-          <p className="mt-3 text-gray-600 max-w-2xl mx-auto text-sm md:text-base">Beyond a job – it&apos;s a chance to help architect a modern financial ecosystem while growing alongside a supportive, high‑caliber team.</p>
+          <h3 className="text-2xl md:text-3xl font-bold text-[#0E0066]">{vacancyPage?.reasonsHeading}</h3>
+          <p className="mt-3 text-gray-600 max-w-2xl mx-auto text-sm md:text-base">{vacancyPage?.reasonsSubtext}</p>
         </div>
         <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {reasons.map((r) => (
+          {reasons.map((r, i) => (
             <motion.li
-              key={r.title}
+              key={r.id}
               whileHover={{ y: -10, scale: 1.04 }}
               whileTap={{ scale: 0.997 }}
               transition={{ type: 'spring', stiffness: 480, damping: 20 }}
@@ -149,11 +127,11 @@ const VacancyLandingPage = () => {
             >
               <div className="flex items-start gap-4">
                 <span className="flex items-center justify-center w-10 h-10 rounded-lg bg-linear-to-tr from-blue-100 to-blue-200 text-blue-700 group-hover:from-blue-200 group-hover:to-blue-300 transition-colors">
-                  {r.icon}
+                  {reasonIcons[i % reasonIcons.length]}
                 </span>
                 <div className="flex-1">
                   <h4 className="font-semibold text-[#0E0066] mb-1 text-sm md:text-base">{r.title}</h4>
-                  <p className="text-xs md:text-sm text-gray-600 leading-relaxed">{r.body}</p>
+                  <p className="text-xs md:text-sm text-gray-600 leading-relaxed">{r.description}</p>
                 </div>
               </div>
               <div className="absolute bottom-0 right-0 w-24 h-24 opacity-10 pointer-events-none bg-linear-to-br from-blue-200 to-transparent rounded-full blur-xl" />

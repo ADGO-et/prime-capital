@@ -11,8 +11,19 @@ import {
   FaPhone,
   FaArrowUp,
 } from "react-icons/fa";
+import { useContactPage } from "@/hooks/queries/usePagesQuery";
+import { useFooter } from "@/hooks/queries/useFooterQuery";
 
 export default function Footer() {
+  const { data: contact } = useContactPage();
+  const { data: footer } = useFooter();
+
+  const socialLinks = [
+    { key: "linkedin", url: footer?.linkedinUrl, Icon: FaLinkedin },
+    { key: "twitter", url: footer?.twitterUrl, Icon: FaTwitter },
+    { key: "facebook", url: footer?.facebookUrl, Icon: FaFacebook },
+  ].filter((s) => s.url);
+
   return (
     <footer className="relative w-full text-white">
       <div className="bg-gradient-to-b from-secondary to-[#1a259d]">
@@ -31,8 +42,7 @@ export default function Footer() {
                 </Link>
               </div>
               <p className="text-sm text-white/80 pl-4">
-                Empowering Ethiopia&apos;s financial future through innovative
-                investment banking solutions.
+                {footer?.tagline}
               </p>
             </div>
 
@@ -95,26 +105,32 @@ export default function Footer() {
                 <Link href="/contact-us">Contact</Link>
               </h3>
               <ul className="flex flex-col gap-3 text-sm text-white/90">
-                <li className="flex items-center gap-3">
-                  <div className="p-2 rounded-md bg-white/10 flex items-center justify-center hover:bg-accent/20 transition">
-                    <FaMapMarkerAlt className="text-accent text-base" />
-                  </div>
-                  <span>Bole Road, Abyssinia Real Estate bldg (12th floor) adjacent to Ethio Ceramics</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <div className="p-2 rounded-md bg-white/10 flex items-center justify-center hover:bg-accent/20 transition">
-                    <FaEnvelope className="text-accent text-base" />
-                  </div>
-                  <span className="hover:text-accent transition cursor-pointer">
-                    Info@primecapitalsc.com
-                  </span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <div className="p-2 rounded-md bg-white/10 flex items-center justify-center hover:bg-accent/20 transition">
-                    <FaPhone className="text-accent text-base" />
-                  </div>
-                  <span>6309/ +251111137147</span>
-                </li>
+                {contact?.address && (
+                  <li className="flex items-center gap-3">
+                    <div className="p-2 rounded-md bg-white/10 flex items-center justify-center hover:bg-accent/20 transition">
+                      <FaMapMarkerAlt className="text-accent text-base" />
+                    </div>
+                    <span>{contact.address}</span>
+                  </li>
+                )}
+                {contact?.email && (
+                  <li className="flex items-center gap-3">
+                    <div className="p-2 rounded-md bg-white/10 flex items-center justify-center hover:bg-accent/20 transition">
+                      <FaEnvelope className="text-accent text-base" />
+                    </div>
+                    <a href={`mailto:${contact.email}`} className="hover:text-accent transition cursor-pointer">
+                      {contact.email}
+                    </a>
+                  </li>
+                )}
+                {contact?.phone && (
+                  <li className="flex items-center gap-3">
+                    <div className="p-2 rounded-md bg-white/10 flex items-center justify-center hover:bg-accent/20 transition">
+                      <FaPhone className="text-accent text-base" />
+                    </div>
+                    <span>{contact.phone}</span>
+                  </li>
+                )}
               </ul>
             </div>
           </div>
@@ -142,26 +158,21 @@ export default function Footer() {
             </button>
 
             {/* Social Icons */}
-            <div className="flex gap-4 mt-4 sm:mt-0">
-              <Link
-                href="#"
-                className="p-2.5 rounded-md bg-white/10 hover:bg-accent/20 transition flex items-center justify-center"
-              >
-                <FaLinkedin className="h-5 w-5 text-accent" />
-              </Link>
-              <Link
-                href="#"
-                className="p-2.5 rounded-md bg-white/10 hover:bg-accent/20 transition flex items-center justify-center"
-              >
-                <FaTwitter className="h-5 w-5 text-accent" />
-              </Link>
-              <Link
-                href="#"
-                className="p-2.5 rounded-md bg-white/10 hover:bg-accent/20 transition flex items-center justify-center"
-              >
-                <FaFacebook className="h-5 w-5 text-accent" />
-              </Link>
-            </div>
+            {socialLinks.length > 0 && (
+              <div className="flex gap-4 mt-4 sm:mt-0">
+                {socialLinks.map(({ key, url, Icon }) => (
+                  <Link
+                    key={key}
+                    href={url!}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2.5 rounded-md bg-white/10 hover:bg-accent/20 transition flex items-center justify-center"
+                  >
+                    <Icon className="h-5 w-5 text-accent" />
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
