@@ -3,95 +3,56 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import {
-  Briefcase,
-  Building2,
   Globe,
+  Briefcase,
   Leaf,
-  TrendingUp,
-  BriefcaseIcon,
   FileTextIcon,
-  Lightbulb,
   Target,
 } from "lucide-react";
+import { useServicesPage } from "@/hooks/queries/usePagesQuery";
 
-const services = [
-  {
-    icon: <FileTextIcon size={28} />,
-    title: "Corporate Finance and Advisory ",
-    desc: "Transaction Advisory, IPO advisory and underwriting, Bond issuance, Private Placements, SME Advisory and Financing solutions, Mergers and Acquisitions (M&A), Corporate restructuring,and Sharia compliant solutions.  ",
-  },
-  {
-    icon: <Target size={28} />,
-    title: "Securities Trading",
-    desc: "Brokerage services, executing trades on behalf of clients. Our clients will have access to investment and trading on various securities, including, equities, treasury Bills, bonds, derivatives and other securities recognized by ECMA.",
-  },
+const serviceIcons = [
+  <FileTextIcon key="file" size={28} />,
+  <Target key="target" size={28} />,
 ];
 
-const processSteps = [
-  {
-    step: "1",
-    title: "Discovery & Analysis",
-    desc: "We begin with a comprehensive assessment of your business, market position, and strategic objectives. Our team conducts thorough due diligence and market analysis to understand your unique needs and opportunities.",
-  },
-  {
-    step: "2",
-    title: "Strategy Development",
-    desc: "Based on our analysis, we develop tailored strategic recommendations that align with your goals. We present multiple scenarios and options, helping you make informed decisions about your financial future.",
-  },
-  {
-    step: "3",
-    title: "Execution & Delivery",
-    desc: "Our experienced team manages the entire execution process, ensuring seamless implementation of your chosen strategy and delivering results that exceed expectations.",
-  },
-];
-
-const differentiators = [
-  {
-    icon: <Globe size={24} />,
-    title: "Market Differentiation",
-    desc: "Deep understanding of Ethiopia’s unique market dynamics combined with international best practices and innovative solutions.",
-  },
-  {
-    icon: <Briefcase size={24} />,
-    title: "Strategic Partnerships",
-    desc: "Extensive network of local and international partners enabling seamless execution and superior deal outcomes.",
-  },
-  {
-    icon: <Leaf size={24} />,
-    title: "ESG Integration",
-    desc: "Commitment to environmental, social, and governance principles in all advisory services and business operations.",
-  },
+const differentiatorIcons = [
+  <Globe key="globe" size={24} />,
+  <Briefcase key="briefcase" size={24} />,
+  <Leaf key="leaf" size={24} />,
 ];
 
 export default function Services() {
+  const { data: services } = useServicesPage();
+
   return (
     <main className="min-h-screen w-full bg-white  text-gray-900">
       {/* What We Offer */}
       <section className="py-20 px-6 md:px-12 text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-          What We Offer
+          {services?.introHeading}
         </h2>
         <p className="text-gray-600 text-[#0E0066] mb-12">
-          Tailored financial solutions designed to drive your business forward
+          {services?.introText}
         </p>
 
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
-          {services.map((item, i) => (
+          {(services?.services ?? []).map((item, i) => (
             <motion.div
-              key={i}
+              key={item.id}
               whileHover={{ y: -6, scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
               className="relative overflow-hidden p-6 bg-white/90 rounded-2xl shadow-md hover:shadow-xl border border-gray-200 items-center bg-cover bg-center bg-no-repeat"
               style={{ backgroundImage: "url(/back-grid.jpg)" }}
             >
               <div className="text-white mx-auto mb-4 bg-linear-to-br from-[#0E0066] to-[#2014FF] w-fit p-2 rounded-full items-center">
-                {item.icon}
+                {serviceIcons[i % serviceIcons.length]}
               </div>
               <h3 className="font-semibold text-lg mb-2 text-textPrimary">
                 {item.title}
               </h3>
               <p className="text-sm text-[#504785]  leading-relaxed">
-                {item.desc}
+                {item.description}
               </p>
             </motion.div>
           ))}
@@ -101,28 +62,28 @@ export default function Services() {
       {/* How We Work */}
       <section className="py-20 px-6 md:px-12">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-2 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-          How We Work
+          {services?.processHeading}
         </h2>
         <p className="text-center mb-12 text-[#504785]">
-          Our proven methodology ensures exceptional results at every stage
+          {services?.processText}
         </p>
 
         <div className="space-y-8 max-w-5xl mx-auto">
-          {processSteps.map((step, i) => (
+          {(services?.processSteps ?? []).map((step, i) => (
             <motion.div
-              key={i}
+              key={step.id}
               whileHover={{ scale: 1.01 }}
               className="group bg-white  border border-gray-200  rounded-xl p-6 flex flex-col sm:flex-row gap-4 items-start drop-shadow-lg hover:border-[#0E0066]"
             >
               <div className="shrink-0 h-10 w-10 rounded-full bg-[#2014FF] group-hover:bg-primary text-white flex items-center justify-center font-bold">
-                {step.step}
+                {i + 1}
               </div>
               <div>
                 <h4 className="font-semibold mb-1 text-textPrimary">
                   {step.title}
                 </h4>
                 <p className="text-sm text-[#504785] leading-relaxed">
-                  {step.desc}
+                  {step.description}
                 </p>
               </div>
             </motion.div>
@@ -133,26 +94,25 @@ export default function Services() {
       {/* Why Clients Choose */}
       <section className="py-20 px-6 md:px-12 bg-linear-to-br from-[#0E0066] to-[#2014FF] text-white text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-2">
-          Why Clients Choose Prime Capital
+          {services?.whyChooseHeading}
         </h2>
         <p className="mb-12 opacity-90">
-          Our unique combination of expertise, values, and innovation sets us
-          apart
+          {services?.whyChooseText}
         </p>
 
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
-          {differentiators.map((item, i) => (
+          {(services?.differentiators ?? []).map((item, i) => (
             <motion.div
-              key={i}
+              key={item.id}
               whileHover={{ y: -4, scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
               className="bg-white/20 backdrop-blur-lg rounded-2xl p-6 border border-white/20"
             >
               <div className="mb-4 flex justify-center bg-white/10 backdrop-blur-lg w-fit p-2 rounded-full text-white mx-auto">
-                {item.icon}
+                {differentiatorIcons[i % differentiatorIcons.length]}
               </div>
               <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
-              <p className="text-sm opacity-90">{item.desc}</p>
+              <p className="text-sm opacity-90">{item.description}</p>
             </motion.div>
           ))}
         </div>
@@ -165,12 +125,10 @@ export default function Services() {
           style={{ backgroundImage: "url(/back-grid.jpg)" }}
         >
           <h3 className="text-2xl md:text-3xl font-semibold mb-4 text-textPrimary">
-            Partner with Prime Capital to Shape Ethiopia&apos;s Capital Market
-            Future
+            {services?.ctaHeading}
           </h3>
           <p className="text-[#504785] mb-6">
-            Let’s discuss how our services can help you achieve your strategic
-            objectives and drive sustainable growth.
+            {services?.ctaText}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/contact-us">

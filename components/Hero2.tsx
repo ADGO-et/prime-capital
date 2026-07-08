@@ -7,6 +7,7 @@ type Hero2Props = {
   description?: React.ReactNode;
 };
 
+
 export default function Hero2({ title, description }: Hero2Props) {
   return (
   <section className="relative isolate min-h-[90vh] w-full overflow-hidden flex flex-col bg-linear-to-br from-primary via-secondary to-[#2014FF]">

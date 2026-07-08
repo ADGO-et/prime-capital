@@ -1,137 +1,66 @@
-import api from "@/lib/axios";
-export interface LocalizedText {
-  en: string;
-  am: string;
-  om: string;
-}
+import strapi from "@/lib/strapi";
 
-export interface ImageBlockContent {
-  urls: string[];
-}
-
-export type ParagraphBlockContent = LocalizedText;
-export type HeadingBlockContent = LocalizedText;
-
-export interface YoutubeBlockContent {
+export interface StrapiMedia {
+  id: number;
   url: string;
+  alternativeText?: string | null;
+  width?: number;
+  height?: number;
 }
 
-export interface LinkBlockContent {
-  url: string;
-  text: string;
-}
-
-export interface BaseBlock {
-  order: number;
-}
-
-export interface ImageBlock extends BaseBlock {
-  type: "image";
-  content: ImageBlockContent;
-}
-
-export interface ParagraphBlock extends BaseBlock {
-  type: "paragraph";
-  content: ParagraphBlockContent;
-}
-
-export interface HeadingBlock extends BaseBlock {
-  type: "heading";
-  content: HeadingBlockContent;
-}
-
-export interface YoutubeBlock extends BaseBlock {
-  type: "youtube";
-  content: YoutubeBlockContent;
-}
-
-export interface LinkBlock extends BaseBlock {
-  type: "link";
-  content: LinkBlockContent;
-}
-
-export type Block =
-  | ImageBlock
-  | ParagraphBlock
-  | YoutubeBlock
-  | LinkBlock
-  | HeadingBlock;
-
-export interface Blog {
-  _id: string;
-  title: LocalizedText;
-  thumbnail: string;
-  blocks: Block[];
+export interface NewsArticle {
+  id: number;
+  documentId: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  banner?: StrapiMedia | null;
   createdAt: string;
   updatedAt: string;
-  __v: number;
+  publishedAt: string;
 }
 
 interface Pagination {
-  total: number;
   page: number;
-  limit: number;
-  totalPages: number;
+  pageSize: number;
+  pageCount: number;
+  total: number;
 }
 
-interface ApiResponseData {
-  blogs: Blog[];
-  pagination: Pagination;
-}
-
-export interface PublishedNewsApiResponse {
-  status: string;
-  message: string;
-  data: ApiResponseData;
-}
-
-export interface SingleBlogApiResponse {
-  status: string;
-  message: string;
-  data: Blog;
+interface StrapiListResponse<T> {
+  data: T[];
+  meta: { pagination: Pagination };
 }
 
 export const getPublishedNews = async (params?: {
   page?: number;
   limit?: number;
-  sortBy?: string;
-  order?: "asc" | "desc";
-  sort?: "asc" | "desc";
-}): Promise<PublishedNewsApiResponse> => {
-  const queryParams: Record<string, string | number> = {};
+  sortBy?: "latest" | "oldest";
+  query?: string;
+}): Promise<{ articles: NewsArticle[]; pagination: Pagination }> => {
+  const sort = params?.sortBy === "oldest" ? "publishedAt:asc" : "publishedAt:desc";
 
-  if (params) {
-    if (typeof params.page !== "undefined") queryParams.page = params.page;
-    if (typeof params.limit !== "undefined") queryParams.limit = params.limit;
+  const response = await strapi.get<StrapiListResponse<NewsArticle>>("/news-articles", {
+    params: {
+      populate: "banner",
+      sort,
+      "pagination[page]": params?.page ?? 1,
+      "pagination[pageSize]": params?.limit ?? 9,
+      ...(params?.query ? { "filters[title][$containsi]": params.query } : {}),
+    },
+  });
 
-    // Normalize sort mapping for common backends
-    if (params.sortBy === "latest") {
-      queryParams.sortBy = "createdAt";
-      queryParams.order = "desc";
-      queryParams.sort = "desc";
-    } else if (params.sortBy === "oldest") {
-      queryParams.sortBy = "createdAt";
-      queryParams.order = "asc";
-      queryParams.sort = "asc";
-    } else if (params.sortBy) {
-      // Pass-through custom field with optional order/sort if provided
-      queryParams.sortBy = params.sortBy;
-      if (params.order) queryParams.order = params.order;
-      if (params.sort) queryParams.sort = params.sort;
-    } else {
-      // If only order/sort provided
-      if (params.order) queryParams.order = params.order;
-      if (params.sort) queryParams.sort = params.sort;
-    }
-  }
-
-  const response = await api.get("/blogs", { params: queryParams });
-  return response.data;
+  return { articles: response.data.data, pagination: response.data.meta.pagination };
 };
 
-export const getBlogById = async (
-  id: string
-): Promise<SingleBlogApiResponse> => {
-  const response = await api.get(`/blogs/${id}`);
-  return response.data;
+export const getNewsArticleBySlug = async (slug: string): Promise<NewsArticle | null> => {
+  const response = await strapi.get<StrapiListResponse<NewsArticle>>("/news-articles", {
+    params: {
+      populate: "banner",
+      "filters[slug][$eq]": slug,
+    },
+  });
+
+  return response.data.data[0] ?? null;
 };

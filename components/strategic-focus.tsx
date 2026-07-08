@@ -2,53 +2,37 @@
 
 import { motion } from "framer-motion";
 import { Lightbulb, Shuffle, ShieldCheck, Award } from "lucide-react";
+import { useHomePage } from "@/hooks/queries/usePagesQuery";
 
-const strengths = [
-  {
-    icon: <Lightbulb className="w-6 h-6 text-white" />,
-    title: "Integrity & Innovation",
-    description:
-      "Pioneering new pathways in Ethiopian finance with transparent practices and cutting-edge solutions that set industry standards.",
-  },
-  {
-    icon: <Shuffle className="w-6 h-6 text-white" />,
-    title: "M&A Advisory",
-    description: "Buy-side, sell-side, and cross-border advisory services.",
-  },
-  {
-    icon: <ShieldCheck className="w-6 h-6 text-white" />,
-    title: "Client Trust & Transparency",
-    description:
-      "Building lasting partnerships through honest communication, ethical practices, and dedicated client-centric service delivery.",
-  },
-  {
-    icon: <Award className="w-6 h-6 text-white" />,
-    title: "Professional Excellence",
-    description:
-      "Delivering world-class financial solutions backed by qualified professionals and international best practices.",
-  },
+const icons = [
+  <Lightbulb key="lightbulb" className="w-6 h-6 text-white" />,
+  <Shuffle key="shuffle" className="w-6 h-6 text-white" />,
+  <ShieldCheck key="shield" className="w-6 h-6 text-white" />,
+  <Award key="award" className="w-6 h-6 text-white" />,
 ];
 
 export default function SignatureStrengths() {
+  const { data: home } = useHomePage();
+  const strengths = home?.strengths ?? [];
+
   return (
     <section className="w-full py-16 bg-gradient-to-b from-[#F9FAFF] to-[#EEF2FF]">
       <div className="max-w-6xl mx-auto px-6 text-center">
         <h2 className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-          Our <span className="">Signature Strengths</span>
+          {home?.strengthsHeading}
         </h2>
         <p className="text-gray-600 mt-2">
-          Four pillars that define our commitment to Ethiopia’s financial
-          excellence
+          {home?.strengthsSubtext}
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
           {strengths.map((item, index) => (
             <motion.div
-              key={index}
+              key={item.id}
               whileHover={{ scale: 1.01 }}
-              className="relative overflow-hidden rounded-2xl border border-white/20 bg-white/10 
-                         backdrop-blur-xl shadow-[0_4px_25px_rgba(20,28,255,0.15)] 
-                         hover:shadow-[0_8px_35px_rgba(20,28,255,0.25)] 
+              className="relative overflow-hidden rounded-2xl border border-white/20 bg-white/10
+                         backdrop-blur-xl shadow-[0_4px_25px_rgba(20,28,255,0.15)]
+                         hover:shadow-[0_8px_35px_rgba(20,28,255,0.25)]
                          p-6 text-left transition-all duration-300 hover:-translate-y-1 bg-cover bg-center bg-no-repeat "
               style={{ backgroundImage: "url(/back-grid.jpg)" }}
             >
@@ -58,10 +42,10 @@ export default function SignatureStrengths() {
               {/* Card content */}
               <div className="relative z-10">
                 <div
-                  className="bg-linear-to-br from-primary to-secondary w-10 h-10 rounded-full 
+                  className="bg-linear-to-br from-primary to-secondary w-10 h-10 rounded-full
                                 flex items-center justify-center mb-4 shadow-md"
                 >
-                  {item.icon}
+                  {icons[index % icons.length]}
                 </div>
                 <h3 className="font-semibold text-gray-800 mb-2">
                   {item.title}

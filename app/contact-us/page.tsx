@@ -2,8 +2,11 @@
 
 import { motion } from "framer-motion";
 import { MapPin, Mail, Phone, Clock } from "lucide-react";
+import { useContactPage } from "@/hooks/queries/usePagesQuery";
 
 export default function Contact() {
+  const { data: contact } = useContactPage();
+
   return (
     <main className="min-h-screen w-full bg-white text-gray-900 ">
       {/* Top: Get in touch text list + Map side by side */}
@@ -13,7 +16,7 @@ export default function Contact() {
           <div>
             <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#0E0066]">Let&apos;s Connect</h2>
             <p className="text-[#504785] mb-8">
-              Weapos;d love to help you start exceeding your goals. Reach us using the details below.
+              We&apos;d love to help you start exceeding your goals. Reach us using the details below.
             </p>
 
             <ul className="space-y-5">
@@ -21,29 +24,31 @@ export default function Contact() {
                 <span className="mt-1 text-[#2014FF]"><MapPin size={20} /></span>
                 <div>
                   <div className="font-semibold text-[#0E0066]">Visit Us</div>
-                  <p className="text-sm text-[#504785]">Bole Road, Abyssinia Real Estate bldg<br/>(12th floor) adjacent to Ethio Ceramics</p>
+                  <p className="text-sm text-[#504785]">{contact?.address}</p>
                 </div>
               </li>
               <li className="flex items-start gap-3">
                 <span className="mt-1 text-[#2014FF]"><Mail size={20} /></span>
                 <div>
                   <div className="font-semibold text-[#0E0066]">Email Us</div>
-                  <a href="mailto:Info@primecapitalsc.com" className="text-sm text-[#504785] hover:underline">Info@primecapitalsc.com</a>
+                  <a href={`mailto:${contact?.email}`} className="text-sm text-[#504785] hover:underline">{contact?.email}</a>
                 </div>
               </li>
               <li className="flex items-start gap-3">
                 <span className="mt-1 text-[#2014FF]"><Phone size={20} /></span>
                 <div>
                   <div className="font-semibold text-[#0E0066]">Call Us</div>
-                  <a href="tel:+251 (0)91122 2911" className="text-sm text-[#504785] hover:underline">6309</a>
+                  <a href={`tel:${contact?.phone}`} className="text-sm text-[#504785] hover:underline">{contact?.phone}</a>
                 </div>
               </li>
               <li className="flex items-start gap-3">
                 <span className="mt-1 text-[#2014FF]"><Clock size={20} /></span>
                 <div>
                   <div className="font-semibold text-[#0E0066]">Business Hours</div>
-                  <p className="text-sm text-[#504785]">Monday - Friday<br/>8:00 AM - 5:00 PM EAT</p>
-                  <p className="text-sm text-[#504785]">Saturday<br/>8:00 AM - 12: 00 PM EAT</p>
+                  <p className="text-sm text-[#504785]">{contact?.weekdayHours}</p>
+                  {contact?.saturdayHours && (
+                    <p className="text-sm text-[#504785]">{contact.saturdayHours}</p>
+                  )}
                 </div>
               </li>
             </ul>
@@ -51,13 +56,15 @@ export default function Contact() {
 
           {/* Right: Map embed */}
           <div className="w-full h-[420px] rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
-            <iframe
-              title="Prime Capital Location"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=38.77,8.98,38.79,9.00&layer=mapnik&marker=8.991646,38.782494"
-              className="w-full h-full"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+            {contact?.mapEmbedUrl && (
+              <iframe
+                title="Prime Capital Location"
+                src={contact.mapEmbedUrl}
+                className="w-full h-full"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            )}
           </div>
         </div>
       </section>
@@ -74,17 +81,15 @@ export default function Contact() {
               New Client Inquiries
             </h3>
             <p className="text-sm text-[#504785]  mb-3">
-              Interested in our investment banking and advisory services? We’d
-              love to hear from you. Our team will respond within 24 hours to
-              discuss how we can support your business objectives.
+              {contact?.newClientInquiriesText}
             </p>
             <p className="text-sm text-[#0E0066]">
               <span className="font-semibold ">Email:</span>{" "}
               <a
                 className=" hover:underline"
-                href="mailto:Info@primecapitalsc.com"
+                href={`mailto:${contact?.email}`}
               >
-                Info@primecapitalsc.com
+                {contact?.email}
               </a>
             </p>
           </motion.div>
@@ -98,27 +103,20 @@ export default function Contact() {
               Career Opportunities
             </h3>
             <p className="text-sm text-[#504785] mb-3">
-              Join our team of talented professionals and help shape Ethiopia’s
-              financial future. We value excellence, integrity, and innovation.
-            </p>
-            <p className="text-sm text-[#504785]  mb-3">
-              We&apos;re always looking for exceptional individuals who share
-              our commitment to excellence, integrity, and innovation.
+              {contact?.careerOpportunitiesText}
             </p>
             <p className="text-sm text-[#2014FF]">
               <span className="font-semibold ">Email:</span>{" "}
               <a
                 className="hover:underline"
-                href="mailto:Info@primecapitalsc.com"
+                href={`mailto:${contact?.email}`}
               >
-                Info@primecapitalsc.com
+                {contact?.email}
               </a>
             </p>
           </motion.div>
         </div>
       </section>
-
-      {/* Removed separate 'Location' section since map is now beside the contact details */}
     </main>
   );
 }

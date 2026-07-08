@@ -1,4 +1,10 @@
+"use client";
+
+import { useListedCompaniesPage } from "@/hooks/queries/usePagesQuery";
+
 export default function ListedCompaniesHero() {
+  const { data: listedCompaniesPage } = useListedCompaniesPage();
+
   return (
     <section className="relative isolate w-full overflow-hidden bg-linear-to-br from-primary/80 via-secondary/80 to-[#2014FF] text-white">
       {/* Background texture */}
@@ -9,10 +15,9 @@ export default function ListedCompaniesHero() {
 
       <div className="mx-auto max-w-6xl px-4 md:px-8 pt-20 pb-16 md:pt-28 md:pb-24">
         <div className="max-w-3xl">
-          <h1 className="text-3xl md:text-5xl font-extrabold leading-tight">ESX Listed Companies</h1>
+          <h1 className="text-3xl md:text-5xl font-extrabold leading-tight">{listedCompaniesPage?.heroTitle}</h1>
           <p className="mt-4 md:mt-6 text-white/90 text-base md:text-lg leading-relaxed">
-            Explore companies listed on the Ethiopian Securities Exchange. Find key disclosures, market
-            classifications, and essential investor information in one place.
+            {listedCompaniesPage?.heroDescription}
           </p>
         </div>
       </div>

@@ -11,8 +11,33 @@ import {
   FaPhone,
   FaArrowUp,
 } from "react-icons/fa";
+import { useContactPage } from "@/hooks/queries/usePagesQuery";
+import { useFooter } from "@/hooks/queries/useFooterQuery";
+import { strapiMediaUrl } from "@/lib/strapi";
 
 export default function Footer() {
+  const { data: contact } = useContactPage();
+  const { data: footer } = useFooter();
+  const quickLinks = [
+    { id: "home", label: "Home", url: "/" },
+    { id: "about", label: "About Us", url: "/about" },
+    { id: "services", label: "Services", url: "/services" },
+    { id: "contact", label: "Contact", url: "/contact-us" },
+  ];
+  const serviceLinks = [
+    { id: "investment-banking", label: "Investment Banking", url: "/services" },
+    { id: "ma-advisory", label: "M&A Advisory", url: "/services" },
+    { id: "capital-markets", label: "Capital Markets", url: "/services" },
+    { id: "corporate-restructuring", label: "Corporate Restructuring", url: "/services" },
+  ];
+  const logoSrc = strapiMediaUrl(footer?.logo?.url) || "/logoblack.png";
+
+  const socialLinks = [
+    { key: "linkedin", url: footer?.linkedinUrl, Icon: FaLinkedin },
+    { key: "twitter", url: footer?.twitterUrl, Icon: FaTwitter },
+    { key: "facebook", url: footer?.facebookUrl, Icon: FaFacebook },
+  ].filter((s) => s.url);
+
   return (
     <footer className="relative w-full text-white">
       <div className="bg-gradient-to-b from-secondary to-[#1a259d]">
@@ -22,7 +47,7 @@ export default function Footer() {
               <div className="pl-4 flex items-center text-white font-semibold text-lg select-none">
                 <Link href="/">
                   <Image
-                    src="/logoblack.png"
+                    src={logoSrc}
                     alt="Logo"
                     width={200}
                     height={100}
@@ -31,40 +56,20 @@ export default function Footer() {
                 </Link>
               </div>
               <p className="text-sm text-white/80 pl-4">
-                Empowering Ethiopia&apos;s financial future through innovative
-                investment banking solutions.
+                {footer?.tagline}
               </p>
             </div>
 
             <div>
               <h3 className="mb-4 font-semibold text-white">Quick Links</h3>
               <ul className="flex flex-col gap-2 text-sm text-white/80">
-                <li>
-                  <Link href="/" className="hover:text-accent hover:underline transition">
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/about" className="hover:text-accent hover:underline transition">
-                    About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/services"
-                    className="hover:text-accent hover:underline transition"
-                  >
-                    Services
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/contact-us"
-                    className="hover:text-accent hover:underline transition"
-                  >
-                    Contact
-                  </Link>
-                </li>
+                {quickLinks.map((link) => (
+                  <li key={link.id}>
+                    <Link href={link.url} className="hover:text-accent hover:underline transition">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
 
@@ -74,18 +79,11 @@ export default function Footer() {
                 <Link href="/services">Services</Link>
               </h3>
               <ul className="flex flex-col gap-2 text-sm text-white/80">
-                <li>
-                  <Link href="/services" className="hover:underline">Investment Banking</Link>
-                </li>
-                <li>
-                  <Link href="/services" className="hover:underline">M&amp;A Advisory</Link>
-                </li>
-                <li>
-                  <Link href="/services" className="hover:underline">Capital Markets</Link>
-                </li>
-                <li>
-                  <Link href="/services" className="hover:underline">Corporate Restructuring</Link>
-                </li>
+                {serviceLinks.map((link) => (
+                  <li key={link.id}>
+                    <Link href={link.url} className="hover:underline">{link.label}</Link>
+                  </li>
+                ))}
               </ul>
             </div>
 
@@ -95,26 +93,32 @@ export default function Footer() {
                 <Link href="/contact-us">Contact</Link>
               </h3>
               <ul className="flex flex-col gap-3 text-sm text-white/90">
-                <li className="flex items-center gap-3">
-                  <div className="p-2 rounded-md bg-white/10 flex items-center justify-center hover:bg-accent/20 transition">
-                    <FaMapMarkerAlt className="text-accent text-base" />
-                  </div>
-                  <span>Bole Road, Abyssinia Real Estate bldg (12th floor) adjacent to Ethio Ceramics</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <div className="p-2 rounded-md bg-white/10 flex items-center justify-center hover:bg-accent/20 transition">
-                    <FaEnvelope className="text-accent text-base" />
-                  </div>
-                  <span className="hover:text-accent transition cursor-pointer">
-                    Info@primecapitalsc.com
-                  </span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <div className="p-2 rounded-md bg-white/10 flex items-center justify-center hover:bg-accent/20 transition">
-                    <FaPhone className="text-accent text-base" />
-                  </div>
-                  <span>6309/ +251111137147</span>
-                </li>
+                {contact?.address && (
+                  <li className="flex items-center gap-3">
+                    <div className="p-2 rounded-md bg-white/10 flex items-center justify-center hover:bg-accent/20 transition">
+                      <FaMapMarkerAlt className="text-accent text-base" />
+                    </div>
+                    <span>{contact.address}</span>
+                  </li>
+                )}
+                {contact?.email && (
+                  <li className="flex items-center gap-3">
+                    <div className="p-2 rounded-md bg-white/10 flex items-center justify-center hover:bg-accent/20 transition">
+                      <FaEnvelope className="text-accent text-base" />
+                    </div>
+                    <a href={`mailto:${contact.email}`} className="hover:text-accent transition cursor-pointer">
+                      {contact.email}
+                    </a>
+                  </li>
+                )}
+                {contact?.phone && (
+                  <li className="flex items-center gap-3">
+                    <div className="p-2 rounded-md bg-white/10 flex items-center justify-center hover:bg-accent/20 transition">
+                      <FaPhone className="text-accent text-base" />
+                    </div>
+                    <span>{contact.phone}</span>
+                  </li>
+                )}
               </ul>
             </div>
           </div>
@@ -128,8 +132,7 @@ export default function Footer() {
         <div className="">
           <div className="mx-auto max-w-7xl px-6 pb-2 flex flex-col sm:flex-row justify-between items-center text-xs">
             <p className="bg-gradient-to-r from-white/70 to-accent bg-clip-text text-transparent">
-              © {new Date().getFullYear()} Prime Capital S.C. — All Rights
-              Reserved
+              © {new Date().getFullYear()} {footer?.copyrightText}
             </p>
 
             {/* Scroll to Top Button */}
@@ -142,26 +145,21 @@ export default function Footer() {
             </button>
 
             {/* Social Icons */}
-            <div className="flex gap-4 mt-4 sm:mt-0">
-              <Link
-                href="#"
-                className="p-2.5 rounded-md bg-white/10 hover:bg-accent/20 transition flex items-center justify-center"
-              >
-                <FaLinkedin className="h-5 w-5 text-accent" />
-              </Link>
-              <Link
-                href="#"
-                className="p-2.5 rounded-md bg-white/10 hover:bg-accent/20 transition flex items-center justify-center"
-              >
-                <FaTwitter className="h-5 w-5 text-accent" />
-              </Link>
-              <Link
-                href="#"
-                className="p-2.5 rounded-md bg-white/10 hover:bg-accent/20 transition flex items-center justify-center"
-              >
-                <FaFacebook className="h-5 w-5 text-accent" />
-              </Link>
-            </div>
+            {socialLinks.length > 0 && (
+              <div className="flex gap-4 mt-4 sm:mt-0">
+                {socialLinks.map(({ key, url, Icon }) => (
+                  <Link
+                    key={key}
+                    href={url!}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2.5 rounded-md bg-white/10 hover:bg-accent/20 transition flex items-center justify-center"
+                  >
+                    <Icon className="h-5 w-5 text-accent" />
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
