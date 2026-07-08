@@ -48,7 +48,7 @@ const NewsPage = () => {
             <label htmlFor="sort" className="text-sm text-muted-foreground">Sort:</label>
             <select
               id="sort"
-              className="border border-blue-200 rounded-md px-3 py-2 text-sm bg-white text-gray-900"
+              className="border border-primary/20 rounded-md px-3 py-2 text-sm bg-white text-gray-900"
               value={sortBy}
               onChange={(e) => {
                 setPage(1);
@@ -64,7 +64,7 @@ const NewsPage = () => {
             <input
               type="search"
               placeholder="Search articles..."
-              className="w-full border border-blue-200 rounded-md px-3 py-2 text-sm bg-white text-gray-900"
+              className="w-full border border-primary/20 rounded-md px-3 py-2 text-sm bg-white text-gray-900"
               value={q}
               onChange={(e) => { setPage(1); setQ(e.target.value); }}
             />
@@ -78,7 +78,7 @@ const NewsPage = () => {
         {/* Featured article */}
         {!isFetching && featured && page === 1 && !q && (
           <Link href={`/news/${featured.slug}`} className="block group mb-10">
-            <div className="relative overflow-hidden rounded-2xl border border-blue-200 bg-blue-50">
+            <div className="relative overflow-hidden rounded-2xl border border-primary/15 bg-primary/5">
               {featured.banner && (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
@@ -88,13 +88,13 @@ const NewsPage = () => {
                 />
               )}
               <div className="relative z-10 p-6 md:p-10 bg-linear-to-t from-white/90 to-white/30">
-                <span className="inline-block text-xs font-semibold bg-blue-200 text-blue-800 px-2 py-1 rounded border border-blue-300">Featured</span>
+                <span className="inline-block text-xs font-semibold bg-primary/10 text-primary px-2 py-1 rounded border border-primary/20">Featured</span>
                 <h3 className="mt-3 text-2xl md:text-3xl font-extrabold text-textPrimary line-clamp-2">
                   {featured.title}
                 </h3>
                 <p className="mt-3 text-gray-700 line-clamp-3 md:line-clamp-2">{featured.excerpt}</p>
                 <div className="mt-4">
-                  <span className="inline-flex items-center gap-2 text-blue-700 font-semibold">Read article →</span>
+                  <span className="inline-flex items-center gap-2 text-primary font-semibold">Read article →</span>
                 </div>
               </div>
             </div>
@@ -108,8 +108,8 @@ const NewsPage = () => {
             ))}
 
           {!isFetching && articles.length === 0 && (
-            <div className="col-span-full flex flex-col items-center justify-center py-12 bg-blue-50 border border-blue-200 rounded-2xl">
-              <div className="flex items-center justify-center mb-4 text-blue-600">
+            <div className="col-span-full flex flex-col items-center justify-center py-12 bg-primary/5 border border-primary/15 rounded-2xl">
+              <div className="flex items-center justify-center mb-4 text-primary">
                 <AlertCircle className="w-12 h-12" />
               </div>
               <h3 className="text-lg font-semibold mb-2 text-center text-textPrimary">

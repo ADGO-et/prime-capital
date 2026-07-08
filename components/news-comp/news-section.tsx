@@ -6,15 +6,18 @@ import Link from "next/link";
 import { usePublishedNews } from "@/hooks/queries/useNewsQuery";
 import { strapiMediaUrl } from "@/lib/strapi";
 
-export function NewsSection({ type = "related" }: { type?: "related" | "all" }) {
+export function NewsSection({ type = "related", excludeSlug }: { type?: "related" | "all"; excludeSlug?: string }) {
   const router = useRouter();
-  const { data, isFetching } = usePublishedNews({ page: 1, limit: 3, sortBy: "latest" });
-  const articles = data?.articles ?? [];
+  const { data, isFetching } = usePublishedNews({ page: 1, limit: excludeSlug ? 4 : 3, sortBy: "latest" });
+  const articles = (data?.articles ?? []).filter((a) => a.slug !== excludeSlug).slice(0, 3);
   const formatDate = (iso?: string) => {
     if (!iso) return "";
     const d = new Date(iso);
     return d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "2-digit" });
   };
+
+  if (type === "related" && !isFetching && articles.length === 0) return null;
+
   return (
     <section className="py-10 sm:py-14 md:py-20 lg:py-24 max-w-7xl mx-auto px-2 sm:px-4 md:px-8 xl:px-16 2xl:px-24 bg-white text-gray-900">
       {/* Header */}
@@ -55,11 +58,11 @@ export function NewsSection({ type = "related" }: { type?: "related" | "all" }) 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {isFetching && articles.length === 0 &&
           Array.from({ length: 3 }).map((_, i) => (
-            <div key={i} className="h-48 sm:h-64 animate-pulse rounded-lg bg-blue-100 border border-blue-200" />
+            <div key={i} className="h-48 sm:h-64 animate-pulse rounded-lg bg-primary/5 border border-primary/15" />
           ))}
         {!isFetching && articles.length === 0 && (
-          <div className="col-span-full flex flex-col items-center justify-center py-8 sm:py-12 bg-blue-50 border border-blue-200 rounded-2xl">
-            <div className="flex items-center justify-center mb-4 text-blue-600">
+          <div className="col-span-full flex flex-col items-center justify-center py-8 sm:py-12 bg-primary/5 border border-primary/15 rounded-2xl">
+            <div className="flex items-center justify-center mb-4 text-primary">
               <AlertCircle className="w-10 h-10 sm:w-12 sm:h-12" />
             </div>
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-center text-textPrimary">

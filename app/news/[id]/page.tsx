@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ChevronLeft, Copy, Twitter, Linkedin, Instagram, Send, Check } from "lucide-react";
 import { useParams } from "next/navigation";
 import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
 import { useNewsArticleBySlug } from "@/hooks/queries/useNewsQuery";
 import { strapiMediaUrl } from "@/lib/strapi";
 import { NewsSection } from "@/components/news-comp/news-section";
@@ -129,7 +130,7 @@ const NewsDetailPage = () => {
               </div>
 
               <div className="prose prose-lg max-w-none prose-headings:text-textPrimary prose-p:text-textSecondary/90 prose-p:leading-8 prose-a:text-primary">
-                <ReactMarkdown>{article.content}</ReactMarkdown>
+                <ReactMarkdown rehypePlugins={[rehypeRaw]}>{article.content}</ReactMarkdown>
               </div>
             </article>
           </div>
@@ -137,7 +138,7 @@ const NewsDetailPage = () => {
       )}
 
       <div className="max-w-7xl mx-auto px-4">
-        <NewsSection type="related" />
+        <NewsSection type="related" excludeSlug={article?.slug} />
       </div>
     </div>
   );
