@@ -6,6 +6,7 @@ import Image from "next/image";
 import MemberModal, { Member as MemberType } from "@/components/Member";
 import { useState } from "react";
 import { useTeamMembers } from "@/hooks/queries/useTeamQuery";
+import { useOurTeamPage } from "@/hooks/queries/usePagesQuery";
 import { TeamMember } from "@/services/team";
 import { strapiMediaUrl } from "@/lib/strapi";
 import { AlertCircle } from "lucide-react";
@@ -84,6 +85,7 @@ function MemberCard({
 export default function OurTeamPage() {
   const [selected, setSelected] = useState<MemberType | null>(null);
   const { data: members, isFetching, isError } = useTeamMembers();
+  const { data: ourTeamPage } = useOurTeamPage();
 
   const boardMembers = (members ?? [])
     .filter((m) => m.category === "Board of Directors")
@@ -101,11 +103,10 @@ export default function OurTeamPage() {
       <section className="py-20 pt-20 px-6 md:px-12 bg-white">
         <motion.div {...fadeInUp} className="max-w-5xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
-            Board of Directors
+            {ourTeamPage?.boardHeading}
           </h2>
           <p className="text-md text-[#504785] mt-4 max-w-2xl mx-auto leading-tight">
-            Our distinguished board brings directors of combined expertise in
-            finance, technology, and strategic leadership.
+            {ourTeamPage?.boardSubtext}
           </p>
         </motion.div>
 
@@ -154,9 +155,9 @@ export default function OurTeamPage() {
       {/* Executive Management */}
       <section className="py-20 px-6 md:px-12 bg-[#F9FAFB]">
         <div className="mt-40 text-center max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">Executive Management</h2>
+          <h2 className="text-3xl md:text-4xl font-bold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">{ourTeamPage?.executiveHeading}</h2>
           <p className="text-md text-[#504785] mt-2 max-w-2xl mx-auto leading-tight">
-            Experienced leaders driving operational excellence and strategic innovation.
+            {ourTeamPage?.executiveSubtext}
           </p>
         </div>
 

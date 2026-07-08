@@ -1,5 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import { getHomePage, getAboutPage, getContactPage, getServicesPage, getVacancyPage } from "@/services/pages";
+import {
+  getHomePage,
+  getAboutPage,
+  getContactPage,
+  getServicesPage,
+  getVacancyPage,
+  getNewsPage,
+  getOurTeamPage,
+  getListedCompaniesPage,
+} from "@/services/pages";
 
 const staleTime = 1000 * 60 * 5;
 
@@ -17,3 +26,12 @@ export const useServicesPage = () =>
 
 export const useVacancyPage = () =>
   useQuery({ queryKey: ["vacancy-page"], queryFn: getVacancyPage, staleTime });
+
+export const useNewsPage = () =>
+  useQuery({ queryKey: ["news-page"], queryFn: getNewsPage, staleTime });
+
+export const useOurTeamPage = () =>
+  useQuery({ queryKey: ["our-team-page"], queryFn: getOurTeamPage, staleTime });
+
+export const useListedCompaniesPage = () =>
+  useQuery({ queryKey: ["listed-companies-page"], queryFn: getListedCompaniesPage, staleTime });

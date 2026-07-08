@@ -61,6 +61,13 @@ const csrIcons = [
   <Sprout key="sprout" size={20} className="text-green-600" />,
 ];
 
+const governanceIcons = [
+  <Crown key="crown" size={18} />,
+  <Users key="users" size={18} />,
+  <TrendingUp key="trending1" size={18} />,
+  <TrendingUp key="trending2" size={18} />,
+];
+
 export default function About() {
   const { data: about } = useAboutPage();
 
@@ -73,7 +80,7 @@ export default function About() {
         <div className="max-w-6xl mx-auto">
           <motion.div {...fadeInLeft}>
             <h2 className="text-4xl md:text-5xl text-center font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Corporate Overview
+              {about?.overviewHeading}
             </h2>
             <div className="space-y-4 text-[#0E0066] text-base md:text-lg leading-relaxed">
               {overviewParagraphs.map((p, i) => (
@@ -130,7 +137,7 @@ export default function About() {
       <section className="py-16 px-6 md:px-12">
         <motion.div {...fadeInUp}>
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-            Core Values — The PRIME Principles
+            {about?.coreValuesHeading}
           </h2>
         </motion.div>
 
@@ -181,7 +188,7 @@ export default function About() {
       <section className="py-20 px-6 md:px-12 bg-linear-to-b from-[#0E0066] to-[#2014FF] text-white">
         <motion.div {...fadeInUp}>
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
-            Strategic Context
+            {about?.strategicContextHeading}
           </h2>
         </motion.div>
 
@@ -211,7 +218,7 @@ export default function About() {
       <section className="py-16 px-6 md:px-12">
         <motion.div {...fadeInUp}>
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-[#0E0066]">
-            Governance & Organizational Structure
+            {about?.governanceHeading}
           </h2>
         </motion.div>
 
@@ -219,73 +226,21 @@ export default function About() {
           {...staggerContainer}
           className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto"
         >
-          <motion.div
-            variants={fadeInUp}
-            whileHover={{ y: -4, scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 300 }}
-            className="bg-white border border-gray-200 rounded-2xl p-6 shadow-md hover:shadow-xl space-y-2 hover:border-[#0E0066]"
-          >
-            <div className="mb-2 inline-flex items-center justify-center bg-[#2014FF]/10 text-[#2014FF] w-10 h-10 rounded-full">
-              <Crown size={18} />
-            </div>
-            <h3 className="font-semibold text-[#0E0066] ">
-              Board of Directors
-            </h3>
-            <p className="text-sm text-[#504785]">
-              Provides oversight and strategic direction
-            </p>
-          </motion.div>
-
-          <motion.div
-            variants={fadeInUp}
-            whileHover={{ y: -4, scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 300 }}
-            className="bg-white border border-gray-200 rounded-2xl p-6 shadow-md hover:shadow-xl space-y-2 hover:border-[#0E0066]"
-          >
-            <div className="mb-2 inline-flex items-center justify-center bg-[#2014FF]/10 text-[#2014FF] w-10 h-10 rounded-full">
-              <Users size={18} />
-            </div>
-            <h3 className="font-semibold text-[#0E0066]">
-              Executive Management
-            </h3>
-            <p className="text-sm text-[#504785]">
-              Handles daily leadership and operations
-            </p>
-          </motion.div>
-
-          <motion.div
-            variants={fadeInUp}
-            whileHover={{ y: -4, scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 300 }}
-            className="bg-white border border-gray-200 rounded-2xl p-6 shadow-md hover:shadow-xl hover:border-[#0E0066]"
-          >
-            <div className="mb-2 inline-flex items-center justify-center bg-[#2014FF]/10 text-[#2014FF] w-10 h-10 rounded-full">
-              <TrendingUp size={18} />
-            </div>
-            <h3 className="font-semibold text-[#0E0066]">
-              Control & Support Units
-            </h3>
-            <p className="text-sm text-[#504785]">
-              Manages compliance, risk, finance, and IT
-            </p>
-          </motion.div>
-
-          <motion.div
-            variants={fadeInUp}
-            whileHover={{ y: -4, scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 300 }}
-            className="bg-white border border-gray-200 rounded-2xl p-6 shadow-md hover:shadow-xl hover:border-[#0E0066]"
-          >
-            <div className="mb-2 inline-flex items-center justify-center bg-[#2014FF]/10 text-[#2014FF] w-10 h-10 rounded-full">
-              <TrendingUp size={18} />
-            </div>
-            <h3 className="font-semibold text-[#0E0066]">
-              Internal Committees
-            </h3>
-            <p className="text-sm text-[#504785]">
-              Risk & Compliance, Nomination & Remuneration and Audit
-            </p>
-          </motion.div>
+          {(about?.governanceCards ?? []).map((card, i) => (
+            <motion.div
+              key={card.id}
+              variants={fadeInUp}
+              whileHover={{ y: -4, scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="bg-white border border-gray-200 rounded-2xl p-6 shadow-md hover:shadow-xl space-y-2 hover:border-[#0E0066]"
+            >
+              <div className="mb-2 inline-flex items-center justify-center bg-[#2014FF]/10 text-[#2014FF] w-10 h-10 rounded-full">
+                {governanceIcons[i % governanceIcons.length]}
+              </div>
+              <h3 className="font-semibold text-[#0E0066]">{card.title}</h3>
+              <p className="text-sm text-[#504785]">{card.description}</p>
+            </motion.div>
+          ))}
         </motion.div>
 
         <motion.div
@@ -318,7 +273,7 @@ export default function About() {
       <section className="pt-0 pb-16 px-6 md:px-12 text-center" style={{marginTop: '-1.5rem'}}>
         <motion.div {...fadeInUp}>
           <h2 className="text-3xl md:text-4xl font-bold text-[#0E0066] my-0 mb-2">
-            Corporate Social Responsibility
+            {about?.csrHeading}
           </h2>
         </motion.div>
 

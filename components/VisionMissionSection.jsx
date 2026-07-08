@@ -16,7 +16,7 @@ export default function VisionMissionSection() {
         {/* Header */}
         <div>
           <h2 className="text-2xl md:text-3xl font-semibold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-            Guided by Vision, Driven by Mission
+            {home?.visionMissionHeading}
           </h2>
         </div>
 
@@ -26,7 +26,7 @@ export default function VisionMissionSection() {
             <CardContent className="p-6 text-left space-y-4">
               <div className="flex items-center gap-3 text-primary">
                 <Target className="w-6 h-6" />
-                <h3 className="text-lg font-semibold">Our Vision</h3>
+                <h3 className="text-lg font-semibold">{about?.visionTitle}</h3>
               </div>
               <p className="text-gray-600  leading-relaxed">
                 {about?.vision}
@@ -38,7 +38,7 @@ export default function VisionMissionSection() {
             <CardContent className="p-6 text-left space-y-4">
               <div className="flex items-center gap-3 text-primary">
                 <Rocket className="w-6 h-6" />
-                <h3 className="text-lg font-semibold">Our Mission</h3>
+                <h3 className="text-lg font-semibold">{about?.missionTitle}</h3>
               </div>
               <p className="text-gray-600  leading-relaxed">
                 {about?.mission}

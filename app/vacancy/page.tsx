@@ -55,11 +55,7 @@ const VacancyLandingPage = () => {
               className="text-4xl md:text-3xl lg:text-4xl font-black mb-6 leading-tight"
             >
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-white">
-                Build the Future
-              </span>
-              <br />
-              <span className="text-white/90">
-                of Finance in Ethiopia
+                {vacancyPage?.heroTitle}
               </span>
             </motion.h1>
 
@@ -70,10 +66,7 @@ const VacancyLandingPage = () => {
               transition={{ duration: 0.8, delay: 0.5 }}
               className="text-lg text-white/90 max-w-3xl mx-auto leading-relaxed mb-10"
             >
-              Join Prime Capital and be part of a pioneering team shaping Ethiopia&apos;s capital markets.
-              <span className="block mt-2 text-white/75">
-                We&apos;re looking for talented individuals ready to make a lasting impact.
-              </span>
+              {vacancyPage?.heroSubtitle}
             </motion.p>
 
             {/* CTA Button */}
@@ -87,7 +80,7 @@ const VacancyLandingPage = () => {
                 href="/vacancy/jobs"
                 className="px-4 py-2 bg-white text-[#2014FF] rounded-full font-semibold text-base hover:bg-white/90 transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
               >
-                View Open Positions
+                {vacancyPage?.heroButtonText}
               </Link>
             </motion.div>
 
