@@ -102,13 +102,24 @@ export default function Footer() {
                   </li>
                 )}
                 {contact?.email && (
-                  <li className="flex items-center gap-3">
-                    <div className="p-2 rounded-md bg-white/10 flex items-center justify-center hover:bg-accent/20 transition">
+                  <li className="flex items-start gap-3">
+                    <div className="p-2 rounded-md bg-white/10 flex items-center justify-center hover:bg-accent/20 transition mt-0.5">
                       <FaEnvelope className="text-accent text-base" />
                     </div>
-                    <a href={`mailto:${contact.email}`} className="hover:text-accent transition cursor-pointer">
-                      {contact.email}
-                    </a>
+                    <div className="flex flex-col gap-1">
+                      <span>
+                        <a href={`mailto:${contact.email}`} className="hover:text-accent transition cursor-pointer">
+                          {contact.email}
+                        </a>
+                        <span className="text-white/50 text-xs ml-1">(general enquiry)</span>
+                      </span>
+                      <span>
+                        <a href="mailto:order@primecapitalsc.com" className="hover:text-accent transition cursor-pointer">
+                          order@primecapitalsc.com
+                        </a>
+                        <span className="text-white/50 text-xs ml-1">(trade order)</span>
+                      </span>
+                    </div>
                   </li>
                 )}
                 {contact?.phone && (
@@ -122,7 +133,14 @@ export default function Footer() {
               </ul>
             </div>
           </div>
-
+          <div className="mx-auto max-w-7xl px-6 py-2 text-lg text-white/70 text-center flex items-center justify-center gap-2 flex-wrap">
+            <span>For complaint and inquiries contact us at</span>
+            <span className="inline-flex items-center gap-1.5 text-white font-semibold">
+              <FaPhone className="text-accent text-base" />
+              6309
+            </span>
+          </div>
+        
           <div className="w-full h-[1px] bg-white/20 mt-2"></div>
         </div>
       </div>
