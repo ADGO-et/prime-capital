@@ -29,16 +29,25 @@ export default function Contact() {
               </li>
               <li className="flex items-start gap-3">
                 <span className="mt-1 text-[#2014FF]"><Mail size={20} /></span>
-                <div>
+                <div className="flex flex-col gap-1">
                   <div className="font-semibold text-[#0E0066]">Email Us</div>
-                  <a href={`mailto:${contact?.email}`} className="text-sm text-[#504785] hover:underline">{contact?.email}</a>
+                  <p className="text-sm text-[#504785]">
+                    <a href={`mailto:${contact?.email}`} className="hover:underline">{contact?.email}</a>
+                    <span className="text-[#504785]/70"> (for general enquiry)</span>
+                  </p>
+                  <p className="text-sm text-[#504785]">
+                    <a href="mailto:order@primecapitalsc.com" className="hover:underline">order@primecapitalsc.com</a>
+                    <span className="text-[#504785]/70"> (for trade order)</span>
+                  </p>
                 </div>
               </li>
               <li className="flex items-start gap-3">
                 <span className="mt-1 text-[#2014FF]"><Phone size={20} /></span>
                 <div>
                   <div className="font-semibold text-[#0E0066]">Call Us</div>
-                  <a href={`tel:${contact?.phone}`} className="text-sm text-[#504785] hover:underline">{contact?.phone}</a>
+                  <a href={`tel:${contact?.phone}`} className="text-sm text-[#504785] hover:underline">For complaint and inquiries contact us at {contact?.phone}
+
+                  </a>
                 </div>
               </li>
               <li className="flex items-start gap-3">
