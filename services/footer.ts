@@ -7,15 +7,20 @@ export interface LinkItem {
   url: string;
 }
 
+export interface SocialLink {
+  id: number;
+  platform: string;
+  url: string;
+}
+
 export interface Footer {
   logo?: StrapiMedia | null;
   tagline: string;
   quickLinks: LinkItem[];
   serviceLinks: LinkItem[];
   copyrightText: string;
-  linkedinUrl?: string;
-  twitterUrl?: string;
-  facebookUrl?: string;
+  complaintsText: string;
+  socialLinks: SocialLink[];
 }
 
 interface StrapiSingleResponse<T> {

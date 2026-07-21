@@ -3,15 +3,7 @@
 import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
-import { FaTiktok, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
-import {
-  Linkedin,
-  Instagram,
-  Youtube,
-  Facebook,
-  Send,
-  Mail,
-} from "lucide-react";
+import { getPlatformIcon } from "@/lib/socialIcons";
 
 type SocialLink = { platform: string; url: string };
 export type Member = {
@@ -29,31 +21,6 @@ export type Member = {
   img?: string; // image path
   edu?: string; // short education summary
 };
-
-function getPlatformIcon(platform: string) {
-  switch (platform.toLowerCase()) {
-    case "linkedin":
-      return <Linkedin size={16} />;
-    case "instagram":
-      return <Instagram size={16} />;
-    case "twitter":
-      return <FaXTwitter size={16} />;
-    case "youtube":
-      return <Youtube size={16} />;
-    case "telegram":
-      return <Send size={16} />;
-    case "facebook":
-      return <Facebook size={16} />;
-    case "whatsapp":
-      return <FaWhatsapp size={16} />;
-    case "tiktok":
-      return <FaTiktok size={16} />;
-    case "email":
-      return <Mail size={16} />;
-    default:
-      return null;
-  }
-}
 
 export default function MemberModal({
   open,

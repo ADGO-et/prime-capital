@@ -41,13 +41,22 @@ export interface AboutPage {
 }
 
 export interface ContactPage {
+  visitUsLabel: string;
   address: string;
+  emailUsLabel: string;
   email: string;
+  emailLabel: string;
+  orderEmail?: string;
+  orderEmailLabel: string;
+  callUsLabel: string;
   phone: string;
+  businessHoursLabel: string;
   weekdayHours: string;
   saturdayHours?: string;
   mapEmbedUrl: string;
+  newClientInquiriesHeading: string;
   newClientInquiriesText: string;
+  careerOpportunitiesHeading: string;
   careerOpportunitiesText: string;
 }
 

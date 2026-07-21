@@ -3,9 +3,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import {
-  FaLinkedin,
-  FaTwitter,
-  FaFacebook,
   FaMapMarkerAlt,
   FaEnvelope,
   FaPhone,
@@ -14,6 +11,7 @@ import {
 import { useContactPage } from "@/hooks/queries/usePagesQuery";
 import { useFooter } from "@/hooks/queries/useFooterQuery";
 import { strapiMediaUrl } from "@/lib/strapi";
+import { getPlatformIcon } from "@/lib/socialIcons";
 
 export default function Footer() {
   const { data: contact } = useContactPage();
@@ -31,12 +29,7 @@ export default function Footer() {
     { id: "corporate-restructuring", label: "Corporate Restructuring", url: "/services" },
   ];
   const logoSrc = strapiMediaUrl(footer?.logo?.url) || "/logoblack.png";
-
-  const socialLinks = [
-    { key: "linkedin", url: footer?.linkedinUrl, Icon: FaLinkedin },
-    { key: "twitter", url: footer?.twitterUrl, Icon: FaTwitter },
-    { key: "facebook", url: footer?.facebookUrl, Icon: FaFacebook },
-  ].filter((s) => s.url);
+  const socialLinks = footer?.socialLinks ?? [];
 
   return (
     <footer className="relative w-full text-white">
@@ -111,14 +104,16 @@ export default function Footer() {
                         <a href={`mailto:${contact.email}`} className="hover:text-accent transition cursor-pointer">
                           {contact.email}
                         </a>
-                        <span className="text-white/50 text-xs ml-1">(general enquiry)</span>
+                        <span className="text-white/50 text-xs ml-1">({contact.emailLabel})</span>
                       </span>
-                      <span>
-                        <a href="mailto:order@primecapitalsc.com" className="hover:text-accent transition cursor-pointer">
-                          order@primecapitalsc.com
-                        </a>
-                        <span className="text-white/50 text-xs ml-1">(trade order)</span>
-                      </span>
+                      {contact.orderEmail && (
+                        <span>
+                          <a href={`mailto:${contact.orderEmail}`} className="hover:text-accent transition cursor-pointer">
+                            {contact.orderEmail}
+                          </a>
+                          <span className="text-white/50 text-xs ml-1">({contact.orderEmailLabel})</span>
+                        </span>
+                      )}
                     </div>
                   </li>
                 )}
@@ -133,13 +128,15 @@ export default function Footer() {
               </ul>
             </div>
           </div>
-          <div className="mx-auto max-w-7xl px-6 py-2 text-lg text-white/70 text-center flex items-center justify-center gap-2 flex-wrap">
-            <span>For complaint and inquiries contact us at</span>
-            <span className="inline-flex items-center gap-1.5 text-white font-semibold">
-              <FaPhone className="text-accent text-base" />
-              6309
-            </span>
-          </div>
+          {contact?.phone && (
+            <div className="mx-auto max-w-7xl px-6 py-2 text-lg text-white/70 text-center flex items-center justify-center gap-2 flex-wrap">
+              <span>{footer?.complaintsText}</span>
+              <span className="inline-flex items-center gap-1.5 text-white font-semibold">
+                <FaPhone className="text-accent text-base" />
+                {contact.phone}
+              </span>
+            </div>
+          )}
         
           <div className="w-full h-[1px] bg-white/20 mt-2"></div>
         </div>
@@ -165,15 +162,15 @@ export default function Footer() {
             {/* Social Icons */}
             {socialLinks.length > 0 && (
               <div className="flex gap-4 mt-4 sm:mt-0">
-                {socialLinks.map(({ key, url, Icon }) => (
+                {socialLinks.map((link) => (
                   <Link
-                    key={key}
-                    href={url!}
+                    key={link.id}
+                    href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2.5 rounded-md bg-white/10 hover:bg-accent/20 transition flex items-center justify-center"
+                    className="p-2.5 rounded-md bg-white/10 hover:bg-accent/20 transition flex items-center justify-center text-accent"
                   >
-                    <Icon className="h-5 w-5 text-accent" />
+                    {getPlatformIcon(link.platform, 20)}
                   </Link>
                 ))}
               </div>

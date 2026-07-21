@@ -23,28 +23,30 @@ export default function Contact() {
               <li className="flex items-start gap-3">
                 <span className="mt-1 text-[#2014FF]"><MapPin size={20} /></span>
                 <div>
-                  <div className="font-semibold text-[#0E0066]">Visit Us</div>
+                  <div className="font-semibold text-[#0E0066]">{contact?.visitUsLabel}</div>
                   <p className="text-sm text-[#504785]">{contact?.address}</p>
                 </div>
               </li>
               <li className="flex items-start gap-3">
                 <span className="mt-1 text-[#2014FF]"><Mail size={20} /></span>
                 <div className="flex flex-col gap-1">
-                  <div className="font-semibold text-[#0E0066]">Email Us</div>
+                  <div className="font-semibold text-[#0E0066]">{contact?.emailUsLabel}</div>
                   <p className="text-sm text-[#504785]">
                     <a href={`mailto:${contact?.email}`} className="hover:underline">{contact?.email}</a>
-                    <span className="text-[#504785]/70"> (for general enquiry)</span>
+                    <span className="text-[#504785]/70"> (for {contact?.emailLabel})</span>
                   </p>
-                  <p className="text-sm text-[#504785]">
-                    <a href="mailto:order@primecapitalsc.com" className="hover:underline">order@primecapitalsc.com</a>
-                    <span className="text-[#504785]/70"> (for trade order)</span>
-                  </p>
+                  {contact?.orderEmail && (
+                    <p className="text-sm text-[#504785]">
+                      <a href={`mailto:${contact.orderEmail}`} className="hover:underline">{contact.orderEmail}</a>
+                      <span className="text-[#504785]/70"> (for {contact.orderEmailLabel})</span>
+                    </p>
+                  )}
                 </div>
               </li>
               <li className="flex items-start gap-3">
                 <span className="mt-1 text-[#2014FF]"><Phone size={20} /></span>
                 <div>
-                  <div className="font-semibold text-[#0E0066]">Call Us</div>
+                  <div className="font-semibold text-[#0E0066]">{contact?.callUsLabel}</div>
                   <a href={`tel:${contact?.phone}`} className="text-sm text-[#504785] hover:underline">For complaint and inquiries contact us at {contact?.phone}
 
                   </a>
@@ -53,7 +55,7 @@ export default function Contact() {
               <li className="flex items-start gap-3">
                 <span className="mt-1 text-[#2014FF]"><Clock size={20} /></span>
                 <div>
-                  <div className="font-semibold text-[#0E0066]">Business Hours</div>
+                  <div className="font-semibold text-[#0E0066]">{contact?.businessHoursLabel}</div>
                   <p className="text-sm text-[#504785]">{contact?.weekdayHours}</p>
                   {contact?.saturdayHours && (
                     <p className="text-sm text-[#504785]">{contact.saturdayHours}</p>
@@ -87,7 +89,7 @@ export default function Contact() {
             className="rounded-2xl p-6 bg-white  border border-gray-200 shadow hover:border-[#0E0066]"
           >
             <h3 className="text-2xl font-bold text-[#0E0066] mb-3">
-              New Client Inquiries
+              {contact?.newClientInquiriesHeading}
             </h3>
             <p className="text-sm text-[#504785]  mb-3">
               {contact?.newClientInquiriesText}
@@ -109,7 +111,7 @@ export default function Contact() {
             className="rounded-2xl p-6 bg-white border border-gray-200  shadow hover:border-[#0E0066]"
           >
             <h3 className="text-2xl font-bold text-[#0E0066] mb-3">
-              Career Opportunities
+              {contact?.careerOpportunitiesHeading}
             </h3>
             <p className="text-sm text-[#504785] mb-3">
               {contact?.careerOpportunitiesText}
