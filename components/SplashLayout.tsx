@@ -46,7 +46,7 @@ export default function SplashLayout({
             width={400}
             height={180}
             priority
-            className="sparkle-logo"
+            className="h-auto w-auto sparkle-logo"
           />
           <style jsx>{`
             .sparkle-logo {

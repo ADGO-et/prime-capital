@@ -14,6 +14,7 @@ import {
 import { useContactPage } from "@/hooks/queries/usePagesQuery";
 import { useFooter } from "@/hooks/queries/useFooterQuery";
 import { strapiMediaUrl } from "@/lib/strapi";
+import { SafeImage } from "@/components/ui/safe-image";
 
 export default function Footer() {
   const { data: contact } = useContactPage();
@@ -46,12 +47,13 @@ export default function Footer() {
             <div className="flex flex-col gap-4">
               <div className="pl-4 flex items-center text-white font-semibold text-lg select-none">
                 <Link href="/">
-                  <Image
+                  <SafeImage
                     src={logoSrc}
+                    fallbackSrc="/logoblack.png"
                     alt="Logo"
                     width={200}
                     height={100}
-                    className="object-contain"
+                    className="h-auto w-auto max-h-12 object-contain"
                   />
                 </Link>
               </div>
