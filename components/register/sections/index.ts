@@ -1,0 +1,15 @@
+export { PersonalInfoSection } from "./PersonalInfoSection";
+export { AddressContactSection } from "./AddressContactSection";
+export { EmploymentSection } from "./EmploymentSection";
+export { BeneficiarySection } from "./BeneficiarySection";
+export { PaymentInfoSection } from "./PaymentInfoSection";
+export { IDVerificationSection } from "./IDVerificationSection";
+export { DisclosuresSection } from "./DisclosuresSection";
+export { FinancialsSection } from "./FinancialsSection";
+export { PEPSection } from "./PEPSection";
+export { BankruptcySection } from "./BankruptcySection";
+export { CriminalRecordSection } from "./CriminalRecordSection";
+export { RiskToleranceSection } from "./RiskToleranceSection";
+export { ExperienceSection } from "./ExperienceSection";
+export { ObjectivesSection } from "./ObjectivesSection";
+export { DeclarationSection } from "./DeclarationSection";
