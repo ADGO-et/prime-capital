@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from "react";
 import { Bars3Icon, XMarkIcon, ChevronDownIcon } from "@heroicons/react/24/solid";
 import { useNavigation } from "@/hooks/queries/useNavigationQuery";
 import { strapiMediaUrl } from "@/lib/strapi";
+import { SafeImage } from "@/components/ui/safe-image";
 
 export default function Navbar() {
   const { data: navigation } = useNavigation();
@@ -63,12 +64,13 @@ export default function Navbar() {
         
           <div className="flex items-center gap-3">
             <Link href="/">
-              <Image
+              <SafeImage
                 src={logoSrc}
+                fallbackSrc="/logoblack.png"
                 alt="Logo"
                 width={150}
                 height={40}
-                className="object-contain"
+                className="h-auto w-auto max-h-10 object-contain"
               />
             </Link>
           </div>
@@ -110,12 +112,26 @@ export default function Navbar() {
               </li>
             </ul>
 
-            <Link
-              href={ctaHref}
-              className="hidden sm:inline-block rounded-md bg-white text-primary font-semibold text-xs px-4 py-2 shadow hover:bg-accent/30 hover:text-primary transition-colors"
-            >
-              {ctaLabel}
-            </Link>
+            <div className="hidden sm:flex items-center gap-3">
+              <Link
+                href="/give-order"
+                className="rounded-md border border-white/40 text-white font-semibold text-xs px-4 py-2 shadow hover:bg-white/10 transition-colors"
+              >
+                Give Order
+              </Link>
+              <Link
+                href="/register"
+                className="rounded-md bg-white text-[#01016F] font-bold text-xs px-4 py-2 shadow-md hover:bg-blue-50 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+              >
+                Open Account
+              </Link>
+              <Link
+                href={ctaHref}
+                className="rounded-md border border-white/40 text-white font-semibold text-xs px-4 py-2 shadow hover:bg-white/10 transition-colors"
+              >
+                {ctaLabel}
+              </Link>
+            </div>
 
             <button
               className="sm:hidden text-white"
@@ -147,7 +163,7 @@ export default function Navbar() {
                 onClick={() => setDropdownOpen(!dropdownOpen)}
                 className="flex items-center justify-between font-semibold text-primary py-1 px-2 rounded hover:bg-white/10 transition"
               >
-                {navigation?.resourcesLabel}
+                {resourcesLabel}
                 <ChevronDownIcon className="w-4 h-4" />
               </button>
               {dropdownOpen && (
@@ -166,8 +182,23 @@ export default function Navbar() {
               )}
             </div>
             <Link
+              href="/give-order"
+              className="w-full rounded-xl text-center font-bold py-2.5 px-3 border border-[#01016F]/20 text-[#01016F] hover:bg-blue-50 transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              Give Order
+            </Link>
+            <Link
+              href="/register"
+              className="w-full rounded-xl text-center font-bold py-2.5 px-3 bg-gradient-to-r from-[#01016F] to-[#2014FF] text-white shadow hover:opacity-95 transition-opacity"
+              onClick={() => setIsOpen(false)}
+            >
+              Open Account
+            </Link>
+            <Link
               href={ctaHref}
-              className="w-full rounded-2xl text-center font-semibold py-2 px-3 bg-white text-primary hover:bg-accent/50 transition-colors"
+              className="w-full rounded-2xl text-center font-semibold py-2 px-3 bg-gray-100 text-primary hover:bg-gray-200 transition-colors"
+              onClick={() => setIsOpen(false)}
             >
               {ctaLabel}
             </Link>
