@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import Link from "next/link";
+import { User, Building2, Users, ArrowRight } from "lucide-react";
 import {
   FormDataState,
   Lang,
@@ -242,23 +242,36 @@ export default function RegisterPage() {
   }
 
   if (!accountType) {
-    const options: Array<[AccountType, string, string]> = [
-      ["individual", "Individual account", "For one person opening a brokerage account."],
-      ["corporate", "Corporate account", "For a registered company; includes company and authorized-contact details."],
-      ["joint", "Joint account", "For two people sharing one brokerage account."],
+    const options: Array<[AccountType, string, string, React.ReactNode]> = [
+      ["individual", "Individual account", "For one person opening a brokerage account.", <User key="ico-individual" className="w-7 h-7" />],
+      ["corporate", "Corporate account", "For a registered company; includes company and authorized-contact details.", <Building2 key="ico-corporate" className="w-7 h-7" />],
+      ["joint", "Joint account", "For two people sharing one brokerage account.", <Users key="ico-joint" className="w-7 h-7" />],
     ];
     return (
-      <main className="min-h-screen bg-[#F8FAFC] flex items-center justify-center px-4 py-16">
-        <section className="max-w-4xl w-full bg-white rounded-3xl border border-slate-200 shadow-xl p-6 sm:p-10">
-          <p className="text-sm font-bold text-[#2014FF] uppercase tracking-wider">Prime Capital</p>
-          <h1 className="text-3xl font-extrabold text-slate-900 mt-2">Choose your account type</h1>
-          <p className="text-slate-600 mt-3">Select the account you want to open. We will show the information required for that account type.</p>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mt-6 sm:mt-8">
-            {options.map(([type, title, description]) => (
-              <button key={type} type="button" onClick={() => selectAccountType(type)} className="text-left rounded-2xl border-2 border-slate-200 p-4 sm:p-5 hover:border-[#2014FF] hover:bg-blue-50 transition">
-                <h2 className="font-bold text-base sm:text-lg text-slate-900">{title}</h2>
-                <p className="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">{description}</p>
-                <span className="inline-block text-xs sm:text-sm font-bold text-[#01016F] mt-4 sm:mt-5">Continue →</span>
+      <main className="min-h-screen bg-gradient-to-br from-[#F8FAFC] to-[#EEF2FF] flex items-center justify-center px-4 py-16">
+        <section className="max-w-5xl w-full">
+          <div className="text-center mb-10">
+            <p className="text-sm font-bold text-[#2014FF] uppercase tracking-widest">Prime Capital</p>
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3">Choose your account type</h1>
+            <p className="text-slate-500 mt-3 max-w-xl mx-auto">Select the account you want to open. We will show the information required for that account type.</p>
+          </div>
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
+            {options.map(([type, title, description, icon]) => (
+              <button
+                key={type}
+                type="button"
+                onClick={() => selectAccountType(type)}
+                className="group relative text-left rounded-2xl bg-white p-6 sm:p-7 shadow-lg shadow-slate-200/50 border border-slate-200 hover:border-[#2014FF] hover:shadow-xl hover:shadow-[#2014FF]/10 transition-all duration-300 hover:-translate-y-1"
+              >
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#2014FF]/10 to-[#01016F]/10 flex items-center justify-center text-[#2014FF] group-hover:from-[#2014FF] group-hover:to-[#01016F] group-hover:text-white transition-all duration-300 mb-4">
+                  {icon}
+                </div>
+                <h2 className="font-bold text-lg text-slate-900 group-hover:text-[#2014FF] transition-colors">{title}</h2>
+                <p className="text-sm text-slate-500 mt-2 leading-relaxed">{description}</p>
+                <span className="inline-flex items-center gap-1.5 text-sm font-bold text-[#2014FF] mt-5 group-hover:gap-2.5 transition-all">
+                  Continue <ArrowRight className="w-4 h-4" />
+                </span>
+                <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-[#2014FF]/0 group-hover:ring-[#2014FF]/20 transition-all duration-300 pointer-events-none" />
               </button>
             ))}
           </div>
