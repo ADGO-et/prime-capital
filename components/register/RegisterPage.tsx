@@ -5,6 +5,7 @@ import Link from "next/link";
 import {
   FormDataState,
   Lang,
+  AccountType,
   initialFormState,
   sections,
 } from "./formTypes";
@@ -31,6 +32,7 @@ import {
   ExperienceSection,
   ObjectivesSection,
   DeclarationSection,
+  AccountTypeDetailsSection,
 } from "./sections";
 import { FormNavigationSidebar, MobileFormNav } from "./FormNavigation";
 
@@ -40,6 +42,7 @@ export default function RegisterPage() {
   const [activeSection, setActiveSection] = useState<string>("sec-01");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [submittedRef, setSubmittedRef] = useState<string | null>(null);
+  const [accountType, setAccountType] = useState<AccountType | null>(null);
 
   const mobileNavRef = useRef<HTMLDivElement>(null);
   const isClickScrolling = useRef<boolean>(false);
@@ -105,6 +108,11 @@ export default function RegisterPage() {
     });
   };
 
+  const selectAccountType = (type: AccountType) => {
+    setAccountType(type);
+    setFormData((prev) => ({ ...prev, investorType: type }));
+  };
+
   const handleObjectiveCheck = (val: string) => {
     setFormData((prev) => {
       const exists = prev.investmentObjective.includes(val);
@@ -147,7 +155,7 @@ export default function RegisterPage() {
     setIsSubmitting(true);
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
       const payload = buildFormPayload(formData);
 
       try {
@@ -228,19 +236,34 @@ export default function RegisterPage() {
               ? "Your KYC application has been successfully submitted."
               : "የKYC ማመልከቻዎ በተሳካ ሁኔታ ተቀበለ።"}
           </p>
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6">
-            <p className="text-sm text-slate-600 mb-1">
-              {lang === "en" ? "Reference ID:" : "ማመሳከሪያ ID:"}
-            </p>
-            <p className="text-lg font-bold text-[#01016F]">{submittedRef}</p>
-          </div>
-          <p className="text-xs text-slate-500">
-            {lang === "en"
-              ? "Please save this reference number for your records."
-              : "ይህ ማመሳከሪያ ቁጥር ለመመዝገብ ያስቀምጡ።"}
-          </p>
-        </div>
       </div>
+    </div>
+    );
+  }
+
+  if (!accountType) {
+    const options: Array<[AccountType, string, string]> = [
+      ["individual", "Individual account", "For one person opening a brokerage account."],
+      ["corporate", "Corporate account", "For a registered company; includes company and authorized-contact details."],
+      ["joint", "Joint account", "For two people sharing one brokerage account."],
+    ];
+    return (
+      <main className="min-h-screen bg-[#F8FAFC] flex items-center justify-center px-4 py-16">
+        <section className="max-w-4xl w-full bg-white rounded-3xl border border-slate-200 shadow-xl p-6 sm:p-10">
+          <p className="text-sm font-bold text-[#2014FF] uppercase tracking-wider">Prime Capital</p>
+          <h1 className="text-3xl font-extrabold text-slate-900 mt-2">Choose your account type</h1>
+          <p className="text-slate-600 mt-3">Select the account you want to open. We will show the information required for that account type.</p>
+          <div className="grid md:grid-cols-3 gap-4 mt-8">
+            {options.map(([type, title, description]) => (
+              <button key={type} type="button" onClick={() => selectAccountType(type)} className="text-left rounded-2xl border-2 border-slate-200 p-5 hover:border-[#2014FF] hover:bg-blue-50 transition">
+                <h2 className="font-bold text-lg text-slate-900">{title}</h2>
+                <p className="text-sm text-slate-600 mt-2 leading-relaxed">{description}</p>
+                <span className="inline-block text-sm font-bold text-[#01016F] mt-5">Continue →</span>
+              </button>
+            ))}
+          </div>
+        </section>
+      </main>
     );
   }
 
@@ -305,7 +328,7 @@ export default function RegisterPage() {
       <MobileFormNav
         activeSection={activeSection}
         onSectionClick={scrollToSection}
-        mobileNavRef={mobileNavRef}
+        mobileNavRef={mobileNavRef as React.RefObject<HTMLDivElement>}
         lang={lang}
       />
 
@@ -327,6 +350,8 @@ export default function RegisterPage() {
               onDobChange={handleDobChange}
               lang={lang}
             />
+
+            <AccountTypeDetailsSection formData={formData} onChange={handleChange} lang={lang} />
 
             <AddressContactSection
               formData={formData}
@@ -398,7 +423,7 @@ export default function RegisterPage() {
 
             <ExperienceSection
               formData={formData}
-              onChange={handleChange as any}
+              onChange={handleChange}
               lang={lang}
             />
 

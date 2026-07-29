@@ -114,6 +114,12 @@ export default function Navbar() {
 
             <div className="hidden sm:flex items-center gap-3">
               <Link
+                href="/give-order"
+                className="rounded-md border border-white/40 text-white font-semibold text-xs px-4 py-2 shadow hover:bg-white/10 transition-colors"
+              >
+                Give Order
+              </Link>
+              <Link
                 href="/register"
                 className="rounded-md bg-white text-[#01016F] font-bold text-xs px-4 py-2 shadow-md hover:bg-blue-50 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
               >
@@ -175,6 +181,13 @@ export default function Navbar() {
                 </div>
               )}
             </div>
+            <Link
+              href="/give-order"
+              className="w-full rounded-xl text-center font-bold py-2.5 px-3 border border-[#01016F]/20 text-[#01016F] hover:bg-blue-50 transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              Give Order
+            </Link>
             <Link
               href="/register"
               className="w-full rounded-xl text-center font-bold py-2.5 px-3 bg-gradient-to-r from-[#01016F] to-[#2014FF] text-white shadow hover:opacity-95 transition-opacity"

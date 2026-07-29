@@ -30,7 +30,7 @@ export const validateFormData = (
     };
   }
 
-  if (!formData.faydaFront || !formData.faydaBack) {
+  if (formData.investorType !== "corporate" && (!formData.faydaFront || !formData.faydaBack)) {
     return {
       valid: false,
       message: t(
@@ -41,7 +41,7 @@ export const validateFormData = (
     };
   }
 
-  if (!formData.kebeleId && !formData.drivingLicense) {
+  if (formData.investorType === "individual" && !formData.kebeleId && !formData.drivingLicense) {
     return {
       valid: false,
       message: t(
@@ -83,6 +83,8 @@ export const buildFormPayload = (formData: FormDataState): FormData => {
     "bankBranch",
     "accountNumber",
     "investorType",
+    "companyName", "registrationNumber", "registrationDate", "registeredAddress", "country",
+    "jointFullName", "jointEmail", "jointPhone", "jointTin", "jointDob", "jointIdNumber",
     "faydaNumber",
     "faydaIssueDate",
     "faydaExpiryDate",
@@ -120,6 +122,12 @@ export const buildFormPayload = (formData: FormDataState): FormData => {
   payload.append("submitConsent", String(formData.submitConsent));
   payload.append("settlementOptions", JSON.stringify(formData.settlementOptions));
   payload.append("investmentObjective", JSON.stringify(formData.investmentObjective));
+  if (formData.investorType === "corporate") {
+    payload.append("corporateContacts", JSON.stringify([
+      { fullName: formData.corporateContactOneName, phone: formData.corporateContactOnePhone, email: formData.corporateContactOneEmail },
+      { fullName: formData.corporateContactTwoName, phone: formData.corporateContactTwoPhone, email: formData.corporateContactTwoEmail },
+    ]));
+  }
 
   if (formData.faydaFront) payload.append("faydaFront", formData.faydaFront);
   if (formData.faydaBack) payload.append("faydaBack", formData.faydaBack);

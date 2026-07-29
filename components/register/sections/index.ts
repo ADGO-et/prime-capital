@@ -13,3 +13,4 @@ export { RiskToleranceSection } from "./RiskToleranceSection";
 export { ExperienceSection } from "./ExperienceSection";
 export { ObjectivesSection } from "./ObjectivesSection";
 export { DeclarationSection } from "./DeclarationSection";
+export { AccountTypeDetailsSection } from "./AccountTypeDetailsSection";

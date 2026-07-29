@@ -16,6 +16,18 @@ export const PersonalInfoSection: React.FC<PersonalInfoSectionProps> = ({
   onDobChange,
   lang,
 }) => {
+  if (formData.investorType === "corporate") {
+    return (
+      <SectionContainer id="sec-01">
+        <SectionHeader num="01" titleEn="Corporate account contact" titleAm="" descEn="Provide the company contact and tax details." descAm="" lang={lang} />
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-5 sm:mt-6">
+          <TextInput label="Company email address" name="email" type="email" required value={formData.email} onChange={onChange} />
+          <TextInput label="Company phone number" name="phone" type="tel" required value={formData.phone} onChange={onChange} />
+          <TextInput label="Tax Identification Number (TIN)" name="tinNumber" required value={formData.tinNumber} onChange={onChange} />
+        </div>
+      </SectionContainer>
+    );
+  }
   return (
     <SectionContainer id="sec-01">
       <SectionHeader

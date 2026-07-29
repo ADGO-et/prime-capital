@@ -1,7 +1,6 @@
 import React from "react";
 import { FormDataState, Lang } from "../formTypes";
 import { SectionHeader, SectionContainer, TextInput, SelectInput, FileInput } from "../SharedComponents";
-import { INVESTOR_TYPE_OPTIONS } from "@/lib/kycFormFields";
 
 interface IDVerificationSectionProps {
   formData: FormDataState;
@@ -16,6 +15,7 @@ export const IDVerificationSection: React.FC<IDVerificationSectionProps> = ({
   onFileChange,
   lang,
 }) => {
+  const idRequired = formData.investorType !== "corporate";
   return (
     <SectionContainer id="sec-06">
       <SectionHeader
@@ -31,13 +31,14 @@ export const IDVerificationSection: React.FC<IDVerificationSectionProps> = ({
         <SelectInput
           label={lang === "en" ? "Investor Type" : "ባለበጀት አይነት"}
           name="investorType"
-          required
+          required={idRequired}
           value={formData.investorType}
-          onChange={onChange as any}
-          options={INVESTOR_TYPE_OPTIONS.map((opt) => ({
-            value: opt.value,
-            label: lang === "en" ? opt.label.en : opt.label.am,
-          }))}
+          onChange={onChange}
+          options={[
+            { value: "individual", label: "Individual account" },
+            { value: "corporate", label: "Corporate account" },
+            { value: "joint", label: "Joint account" },
+          ]}
         />
       </div>
 
@@ -53,7 +54,7 @@ export const IDVerificationSection: React.FC<IDVerificationSectionProps> = ({
         <TextInput
           label={lang === "en" ? "Fayda ID Number" : "የፋይዳ መታወቂያ ቁጥር"}
           name="faydaNumber"
-          required
+          required={idRequired}
           value={formData.faydaNumber}
           onChange={onChange}
           placeholder="XXXXXXXXXXXX"
@@ -62,7 +63,7 @@ export const IDVerificationSection: React.FC<IDVerificationSectionProps> = ({
           label={lang === "en" ? "Issue Date" : "ታሪክ ስሪት"}
           name="faydaIssueDate"
           type="date"
-          required
+          required={idRequired}
           value={formData.faydaIssueDate}
           onChange={onChange}
         />
@@ -70,7 +71,7 @@ export const IDVerificationSection: React.FC<IDVerificationSectionProps> = ({
           label={lang === "en" ? "Expiry Date" : "ማለቅ ታሪክ"}
           name="faydaExpiryDate"
           type="date"
-          required
+          required={idRequired}
           value={formData.faydaExpiryDate}
           onChange={onChange}
         />
@@ -80,7 +81,7 @@ export const IDVerificationSection: React.FC<IDVerificationSectionProps> = ({
         <FileInput
           label={lang === "en" ? "Fayda Front Side" : "ፋይዳ ፊት ገጽ"}
           name="faydaFront"
-          required
+          required={idRequired}
           onChange={(e) => onFileChange(e, "faydaFront")}
           helperText={lang === "en" ? "Upload image or PDF (Max 5MB)" : "ምስል ወይም PDF ያስቀምጡ (ከ5MB ያነስ)"}
         />

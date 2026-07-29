@@ -1,4 +1,5 @@
 export type Lang = "en" | "am";
+export type AccountType = "individual" | "corporate" | "joint";
 
 export interface FormDataState {
   // 01 Personal Info
@@ -40,6 +41,23 @@ export interface FormDataState {
 
   // 06 ID Verification & Uploads
   investorType: string;
+  companyName: string;
+  registrationNumber: string;
+  registrationDate: string;
+  registeredAddress: string;
+  country: string;
+  corporateContactOneName: string;
+  corporateContactOnePhone: string;
+  corporateContactOneEmail: string;
+  corporateContactTwoName: string;
+  corporateContactTwoPhone: string;
+  corporateContactTwoEmail: string;
+  jointFullName: string;
+  jointEmail: string;
+  jointPhone: string;
+  jointTin: string;
+  jointDob: string;
+  jointIdNumber: string;
   faydaNumber: string;
   faydaIssueDate: string;
   faydaExpiryDate: string;
@@ -123,7 +141,24 @@ export const initialFormState: FormDataState = {
   bankChangeAck: false,
   settlementOptions: ["dividends", "rights_issue", "capital_return", "share_buyback"],
 
-  investorType: "individual_ethiopian",
+  investorType: "",
+  companyName: "",
+  registrationNumber: "",
+  registrationDate: "",
+  registeredAddress: "",
+  country: "Ethiopia",
+  corporateContactOneName: "",
+  corporateContactOnePhone: "",
+  corporateContactOneEmail: "",
+  corporateContactTwoName: "",
+  corporateContactTwoPhone: "",
+  corporateContactTwoEmail: "",
+  jointFullName: "",
+  jointEmail: "",
+  jointPhone: "",
+  jointTin: "",
+  jointDob: "",
+  jointIdNumber: "",
   faydaNumber: "",
   faydaIssueDate: "",
   faydaExpiryDate: "",

@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
         hostname: "**",
       },
       {
+        protocol: "https",
+        hostname: "cms.primecapitalsc.com",
+        pathname: "/uploads/**",
+      },
+      {
         protocol: "http",
         hostname: "localhost",
         port: "1337",

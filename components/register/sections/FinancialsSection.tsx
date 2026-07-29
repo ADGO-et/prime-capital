@@ -63,7 +63,7 @@ export const FinancialsSection: React.FC<FinancialsSectionProps> = ({
           onChange={onChange as any}
           options={INCOME_BRACKETS.map((bracket) => ({
             value: bracket.value,
-            label: bracket.range,
+            label: lang === "en" ? bracket.label.en : bracket.label.am,
           }))}
         />
         <SelectInput
@@ -74,7 +74,7 @@ export const FinancialsSection: React.FC<FinancialsSectionProps> = ({
           onChange={onChange as any}
           options={TRANSACTION_VOLUME_BRACKETS.map((bracket) => ({
             value: bracket.value,
-            label: bracket.range,
+            label: lang === "en" ? bracket.label.en : bracket.label.am,
           }))}
         />
       </div>
