@@ -160,6 +160,14 @@ export default function HeroSlider() {
         </div>
       </div>
 
+      {/* Always-visible Open Account Button */}
+      <Link
+        href="http://localhost:3000/register"
+        className="absolute bottom-4 left-4 md:left-8 z-30 px-6 py-3 rounded-lg font-semibold text-sm md:text-base transition-all duration-300 transform hover:scale-105 hover:shadow-2xl bg-primary text-white hover:bg-primary/90"
+      >
+        Open Account
+      </Link>
+
       {/* Navigation */}
       <button
         onClick={prevSlide}
