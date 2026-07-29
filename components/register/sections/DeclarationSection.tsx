@@ -45,7 +45,7 @@ export const DeclarationSection: React.FC<DeclarationSectionProps> = ({
         />
       </div>
 
-      <div className="bg-blue-50/80 border border-blue-200/90 rounded-xl sm:rounded-2xl p-5 mt-6">
+      <div className="bg-blue-50/80 border border-blue-200/90 rounded-xl sm:rounded-2xl p-4 sm:p-5 mt-5 sm:mt-6">
         <h3 className="text-sm font-bold text-blue-950 mb-3.5">
           {lang === "en" ? "Declaration" : "ስምምነት"}
         </h3>
@@ -73,8 +73,8 @@ export const DeclarationSection: React.FC<DeclarationSectionProps> = ({
         </ul>
       </div>
 
-      <div className="mt-6 pt-4 border-t border-slate-100">
-        <label className="flex items-start gap-3.5 p-4 rounded-xl border-2 border-slate-200/80 bg-slate-50/70 cursor-pointer hover:border-[#2014FF]/50 transition-all">
+      <div className="mt-5 sm:mt-6 pt-3 sm:pt-4 border-t border-slate-100">
+        <label className="flex items-start gap-3 p-3 sm:gap-3.5 sm:p-4 rounded-xl border-2 border-slate-200/80 bg-slate-50/70 cursor-pointer hover:border-[#2014FF]/50 transition-all">
           <input
             type="checkbox"
             id="submitConsent"
@@ -91,11 +91,11 @@ export const DeclarationSection: React.FC<DeclarationSectionProps> = ({
         </label>
       </div>
 
-      <div className="mt-6 pt-4 border-t border-slate-100 flex gap-3">
+      <div className="mt-5 sm:mt-6 pt-3 sm:pt-4 border-t border-slate-100 flex gap-3">
         <button
           type="submit"
           disabled={isSubmitting || !formData.submitConsent}
-          className={`flex-1 px-6 py-3.5 rounded-xl sm:rounded-2xl font-bold text-sm transition-all ${
+          className={`w-full px-6 py-4 sm:py-3.5 rounded-xl sm:rounded-2xl font-bold text-sm transition-all ${
             isSubmitting || !formData.submitConsent
               ? "bg-slate-200 text-slate-400 cursor-not-allowed"
               : "bg-gradient-to-r from-[#01016F] to-[#2014FF] text-white hover:shadow-lg hover:shadow-blue-600/30 active:scale-[0.98]"
