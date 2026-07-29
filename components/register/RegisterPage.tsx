@@ -213,11 +213,11 @@ export default function RegisterPage() {
 
   if (submittedRef) {
     return (
-      <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center px-4 py-20">
-        <div className="bg-white rounded-3xl shadow-2xl p-8 sm:p-12 max-w-md text-center">
-          <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6">
+      <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center px-4 py-16 sm:py-20">
+        <div className="bg-white rounded-3xl shadow-2xl p-6 sm:p-12 max-w-md w-full text-center">
+          <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-5 sm:mb-6">
             <svg
-              className="w-8 h-8 text-white"
+              className="w-7 h-7 sm:w-8 sm:h-8 text-white"
               fill="currentColor"
               viewBox="0 0 20 20"
             >
@@ -228,10 +228,10 @@ export default function RegisterPage() {
               />
             </svg>
           </div>
-          <h2 className="text-2xl font-bold text-slate-900 mb-2">
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2">
             {lang === "en" ? "Application Submitted!" : "ማመልከቻ ተቀበለ!"}
           </h2>
-          <p className="text-slate-600 mb-6">
+          <p className="text-sm sm:text-base text-slate-600 mb-6">
             {lang === "en"
               ? "Your KYC application has been successfully submitted."
               : "የKYC ማመልከቻዎ በተሳካ ሁኔታ ተቀበለ።"}
@@ -253,12 +253,12 @@ export default function RegisterPage() {
           <p className="text-sm font-bold text-[#2014FF] uppercase tracking-wider">Prime Capital</p>
           <h1 className="text-3xl font-extrabold text-slate-900 mt-2">Choose your account type</h1>
           <p className="text-slate-600 mt-3">Select the account you want to open. We will show the information required for that account type.</p>
-          <div className="grid md:grid-cols-3 gap-4 mt-8">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mt-6 sm:mt-8">
             {options.map(([type, title, description]) => (
-              <button key={type} type="button" onClick={() => selectAccountType(type)} className="text-left rounded-2xl border-2 border-slate-200 p-5 hover:border-[#2014FF] hover:bg-blue-50 transition">
-                <h2 className="font-bold text-lg text-slate-900">{title}</h2>
-                <p className="text-sm text-slate-600 mt-2 leading-relaxed">{description}</p>
-                <span className="inline-block text-sm font-bold text-[#01016F] mt-5">Continue →</span>
+              <button key={type} type="button" onClick={() => selectAccountType(type)} className="text-left rounded-2xl border-2 border-slate-200 p-4 sm:p-5 hover:border-[#2014FF] hover:bg-blue-50 transition">
+                <h2 className="font-bold text-base sm:text-lg text-slate-900">{title}</h2>
+                <p className="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">{description}</p>
+                <span className="inline-block text-xs sm:text-sm font-bold text-[#01016F] mt-4 sm:mt-5">Continue →</span>
               </button>
             ))}
           </div>
@@ -270,7 +270,7 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-slate-900 pb-20 font-sans">
       {/* Header Banner */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#01016F] via-[#0C0AA6] to-[#2014FF] text-white py-10 sm:py-16 px-4 sm:px-8 lg:px-16 shadow-2xl">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#01016F] via-[#0C0AA6] to-[#2014FF] text-white py-8 sm:py-16 px-4 sm:px-8 lg:px-16 shadow-2xl">
         <div className="absolute top-0 right-0 w-80 h-80 bg-blue-400/15 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute -bottom-10 -left-10 w-80 h-80 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none" />
 
