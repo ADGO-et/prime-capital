@@ -33,6 +33,7 @@ export interface FormDataState {
   beneficiaryRelationship: string;
 
   // 05 Payment
+  accountTitle: string;
   bankName: string;
   bankBranch: string;
   accountNumber: string;
@@ -135,6 +136,7 @@ export const initialFormState: FormDataState = {
   beneficiaryName: "",
   beneficiaryRelationship: "",
 
+  accountTitle: "",
   bankName: "",
   bankBranch: "",
   accountNumber: "",

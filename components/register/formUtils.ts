@@ -79,6 +79,7 @@ export const buildFormPayload = (formData: FormDataState): FormData => {
     "employmentStatus",
     "beneficiaryName",
     "beneficiaryRelationship",
+    "accountTitle",
     "bankName",
     "bankBranch",
     "accountNumber",
@@ -115,6 +116,10 @@ export const buildFormPayload = (formData: FormDataState): FormData => {
     const val = formData[key];
     if (typeof val === "string") payload.append(key, val);
   }
+
+  // Backend expects "city" (confirmed via KYC submit 400 response); keep
+  // cityAdministration too in case other consumers still read that key.
+  payload.append("city", formData.cityAdministration);
 
   payload.append("marketingCommunications", String(formData.marketingCommunications));
   payload.append("hasBeneficiary", String(formData.hasBeneficiary));

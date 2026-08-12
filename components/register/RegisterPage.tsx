@@ -42,6 +42,7 @@ export default function RegisterPage() {
   const [activeSection, setActiveSection] = useState<string>("sec-01");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [submittedRef, setSubmittedRef] = useState<string | null>(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [accountType, setAccountType] = useState<AccountType | null>(null);
 
   const mobileNavRef = useRef<HTMLDivElement>(null);
@@ -153,26 +154,32 @@ export default function RegisterPage() {
     }
 
     setIsSubmitting(true);
+    setSubmitError(null);
 
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL;
       const payload = buildFormPayload(formData);
 
-      try {
-        const res = await fetch(`${apiUrl}/api/kyc/submit`, {
-          method: "POST",
-          body: payload,
-        });
+      const res = await fetch(`${apiUrl}/api/kyc/submit`, {
+        method: "POST",
+        body: payload,
+      });
 
-        const data = await res.json();
-        if (res.ok && data.referenceId) {
-          setSubmittedRef(data.referenceId);
-        } else {
-          setSubmittedRef(generateReferenceId());
-        }
-      } catch (networkErr) {
-        // Fallback for offline client demo
-        setSubmittedRef(generateReferenceId());
+      const data = await res.json();
+
+      if (res.ok && data.success !== false) {
+        setSubmittedRef(data.referenceId || generateReferenceId());
+      } else {
+        const errors: string[] = Array.isArray(data.errors) ? data.errors : [];
+        setSubmitError(
+          errors.length > 0
+            ? errors.join(" ")
+            : t(
+                "Submission failed. Please review the form and try again.",
+                "ማስገባት አልተሳካም። እባክዎ ቅጹን ይመልከቱ እና እንደገና ይሞክሩ።",
+                lang
+              )
+        );
       }
     } catch (err) {
       alert(
@@ -450,6 +457,7 @@ export default function RegisterPage() {
               formData={formData}
               onChange={handleChange}
               isSubmitting={isSubmitting}
+              submitError={submitError}
               lang={lang}
             />
           </form>

@@ -36,7 +36,18 @@ export const PaymentInfoSection: React.FC<PaymentInfoSectionProps> = ({
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-5 sm:mt-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mt-5 sm:mt-6">
+        <TextInput
+          label={lang === "en" ? "Account Title" : "የሂሳብ ስም"}
+          name="accountTitle"
+          required
+          value={formData.accountTitle}
+          onChange={onChange}
+          placeholder={lang === "en" ? "Name as it appears on the bank account" : "በባንክ ሂሳብ ላይ የተመዘገበ ስም"}
+        />
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-4 sm:mt-6">
         <SelectInput
           label={lang === "en" ? "Bank Name" : "የባንክ ስም"}
           name="bankName"

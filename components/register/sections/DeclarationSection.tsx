@@ -6,6 +6,7 @@ interface DeclarationSectionProps {
   formData: FormDataState;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isSubmitting: boolean;
+  submitError?: string | null;
   lang: Lang;
 }
 
@@ -13,6 +14,7 @@ export const DeclarationSection: React.FC<DeclarationSectionProps> = ({
   formData,
   onChange,
   isSubmitting,
+  submitError,
   lang,
 }) => {
   return (
@@ -90,6 +92,12 @@ export const DeclarationSection: React.FC<DeclarationSectionProps> = ({
           </label>
         </label>
       </div>
+
+      {submitError && (
+        <div className="mt-5 sm:mt-6 bg-red-50/80 border border-red-200/90 rounded-xl sm:rounded-2xl p-4">
+          <p className="text-xs text-red-800 leading-relaxed font-semibold">{submitError}</p>
+        </div>
+      )}
 
       <div className="mt-5 sm:mt-6 pt-3 sm:pt-4 border-t border-slate-100 flex gap-3">
         <button
