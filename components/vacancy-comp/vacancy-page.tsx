@@ -323,27 +323,7 @@ export function JobOpportunities() {
                       </div>
                     )}
                   </div>
-                  <div>
-                    <h3 className="font-semibold text-[#0E0066] mb-3">What We Offer</h3>
-                    {(selectedJob.whatWeOffer?.length ?? 0) > 0 ? (
-                      <ul className="space-y-2 list-disc list-inside">
-                        {selectedJob.whatWeOffer!.map((offer) => (
-                          <li key={offer.id} className="text-gray-700 text-sm">{offer.value}</li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <div className="flex items-center gap-2 text-gray-500 text-sm">
-                        <AlertCircle className="w-4 h-4" />
-                        <span>No offers listed yet.</span>
-                      </div>
-                    )}
-                  </div>
                 </CardContent>
-                <div className="p-6 border-t border-blue-200 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
-                  <Button asChild className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white">
-                    <a href={selectedJob.applyLink} target="_blank" rel="noopener noreferrer">Apply for Position</a>
-                  </Button>
-                </div>
               </Card>
             ) : !isLoading && (
                 <div className="flex items-center justify-center h-full bg-white border border-blue-200 rounded-2xl shadow-md p-6">

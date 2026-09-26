@@ -113,13 +113,6 @@ export default function Footer() {
                         <a href={`mailto:${contact.email}`} className="hover:text-accent transition cursor-pointer">
                           {contact.email}
                         </a>
-                        <span className="text-white/50 text-xs ml-1">(general enquiry)</span>
-                      </span>
-                      <span>
-                        <a href="mailto:order@primecapitalsc.com" className="hover:text-accent transition cursor-pointer">
-                          order@primecapitalsc.com
-                        </a>
-                        <span className="text-white/50 text-xs ml-1">(trade order)</span>
                       </span>
                     </div>
                   </li>

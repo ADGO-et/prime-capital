@@ -33,11 +33,6 @@ export default function Contact() {
                   <div className="font-semibold text-[#0E0066]">Email Us</div>
                   <p className="text-sm text-[#504785]">
                     <a href={`mailto:${contact?.email}`} className="hover:underline">{contact?.email}</a>
-                    <span className="text-[#504785]/70"> (for general enquiry)</span>
-                  </p>
-                  <p className="text-sm text-[#504785]">
-                    <a href="mailto:order@primecapitalsc.com" className="hover:underline">order@primecapitalsc.com</a>
-                    <span className="text-[#504785]/70"> (for trade order)</span>
                   </p>
                 </div>
               </li>
